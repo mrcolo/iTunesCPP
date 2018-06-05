@@ -6,7 +6,7 @@ InitializeEngine::InitializeEngine()
 {
     museng = new musicEngine();
     string test = dir.currentPath().toUtf8().constData();
-     museng->setWhatToPlay("../../../example.wav");
+     museng->setWhatToPlay("../../../../example.wav");
 }
 
 InitializeEngine::~InitializeEngine()
