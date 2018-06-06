@@ -54,13 +54,14 @@ ApplicationWindow {
            focus: true
            closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
            Text{
+               id:inputArea
             x:parent.width/2 - 50
             y:parent.height/2 - 10
             text:"Drag a Song here "
            }
            Rectangle {
                id: background;
-               color: "blue";
+               color: "transparent";
                width: parent.width;
                height: parent.height;
 
@@ -68,17 +69,13 @@ ApplicationWindow {
                    id: dropArea;
                    anchors.fill: parent;
                    onEntered: {
-                       background.color = "gray";
                        drag.accept (Qt.CopyAction);
-                       console.log("onEntered");
+                       inputArea.text = "Now Drop it!"
                    }
                    onDropped: {
                        console.log ("onDropped");
-                       background.color = "blue";
-                   }
-                   onExited: {
-                       bckground.color = "white";
-                       console.log ("onExited");
+                       console.log(drop.urls)
+                       inputArea.text = "Drag a Song here"
                    }
                }
            }
