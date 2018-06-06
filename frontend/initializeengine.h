@@ -14,6 +14,7 @@ public:
     musicEngine* museng;
     //musicEngine museng;
     Q_INVOKABLE void playSound();
+    Q_INVOKABLE void pauseSound();
 };
 
 #endif // INITIALIZEENGINE_H

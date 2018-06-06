@@ -35,7 +35,6 @@ ApplicationWindow {
                 text: "Add Song"
                 icon: FontAwesome.icons.fa_music
                 onClicked: {
-                   museng.playSound()
                     popup.open()
                 }
             }
@@ -81,14 +80,22 @@ ApplicationWindow {
                }
            }
        }
-
+    ButtonDefault{
+        class_name: "energized"
+        width: parent.width
+        id: addPlaylist
+       text: "Add Playlist"
+    }
     Grid {
         columns: 2
         spacing: 0
         width: parent.width
         height: parent.height
+        anchors.top: addPlaylist.bottom
 
         ScrollView {
+            id: viewPlaylist
+            padding: 30
             width: parent.width/4
             height: parent.height
 
@@ -208,25 +215,42 @@ ApplicationWindow {
            Row{
              id: commands
              width:parent.width
+
             Button{
-                width:parent.width/5
+                width:parent.width/6
                 text: "Previous"
+                padding:20
             }
             Button{
-                width:parent.width/5
+                width:parent.width/6
                 text: "Play"
+                padding:20
+                onClicked: {
+                    museng.playSound()
+                }
             }
             Button{
-                width:parent.width/5
+                width:parent.width/6
+                text: "Pause"
+                padding:20
+                onClicked: {
+                    museng.pauseSound()
+                }
+            }
+            Button{
+                width:parent.width/6
                 text: "Next"
+                padding:20
             }
             Button{
-                width:parent.width/5
+                width:parent.width/6
                 text: "Loop"
+                padding:20
             }
             Button{
-                width:parent.width/5
+                width:parent.width/6
                 text: "Shuffle"
+                padding:20
             }
 
           }
@@ -236,9 +260,10 @@ ApplicationWindow {
              width:parent.width
 
              ScrollView {
+                 anchors.top: addPlaylist.bottom
                  width: parent.width
                  padding: 50
-                 height:800
+                 height:600
 
                  ListView {
                      model: ListModel {

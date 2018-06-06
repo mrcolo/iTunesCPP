@@ -81,6 +81,7 @@ void musicEngine::shuffle(bool yes){
 void musicEngine::play()
 {
     engine->stopAllSounds();
+
     music = engine->play2D((currentPlay).c_str(),false, false, true);
     if(music)
     {

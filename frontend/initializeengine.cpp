@@ -17,3 +17,7 @@ InitializeEngine::~InitializeEngine()
 void InitializeEngine::playSound(){
         museng->play();
 }
+
+void InitializeEngine::pauseSound(){
+        museng->pause();
+}
