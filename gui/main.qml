@@ -39,10 +39,7 @@ ApplicationWindow {
                     popup.open()
                 }
             }
-
-
         }
-
         class_name: "header"
         title: "🔥 myMusic 🔥"
     }
@@ -77,7 +74,8 @@ ApplicationWindow {
                    }
                    onDropped: {
                        console.log ("onDropped");
-                       console.log(drop.urls)
+                       museng.currentPath = drop.urls
+                       console.log(museng.currentPath)
                        inputArea.text = "Drag a Song here"
                    }
                }

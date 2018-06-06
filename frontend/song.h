@@ -2,7 +2,7 @@
 #define SONG_H
 #include <iostream>
 #include <QImage>
-#include <Qstring>
+#include <QString>
 #include <QStringList>
 #include <QJsonArray>
 #include <QJsonDocument>
@@ -23,10 +23,10 @@ public:
 
 
 private:
-    Qstring name;
-    Qstring artist;
-    Qstring album;
-    Qstring path;
+    QString name;
+    QString artist;
+    QString album;
+    QString path;
 };
 
 #endif // SONG_H

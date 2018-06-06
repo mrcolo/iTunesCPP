@@ -1,5 +1,6 @@
 #include "playlist.h"
-
+#include <QDebug>
+#include <QJsonObject>
 playlist::playlist()
 {
 
@@ -24,15 +25,15 @@ void playlist::readJson()
   QJsonValue value = sett2.value(QString("appName"));
   qWarning() << value;
   QJsonObject item = value.toObject();
-  qWarning() << tr("QJsonObject of description: ") << item;
+  qWarning() << "QJsonObject of description: " << item;
 
   /* in case of string value get value and convert into string*/
-  qWarning() << tr("QJsonObject[appName] of description: ") << item["description"];
+  qWarning() << "QJsonObject[appName] of description: " << item["description"];
   QJsonValue subobj = item["description"];
   qWarning() << subobj.toString();
 
   /* in case of array get array and convert into string*/
-  qWarning() << tr("QJsonObject[appName] of value: ") << item["imp"];
+  qWarning() << "QJsonObject[appName] of value: " << item["imp"];
   QJsonArray test = item["imp"].toArray();
   qWarning() << test[1].toString();
 }

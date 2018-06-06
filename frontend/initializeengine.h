@@ -10,7 +10,7 @@ class InitializeEngine :
 public:
      InitializeEngine();
     ~InitializeEngine();
-
+    string currentPath;
     musicEngine* museng;
     //musicEngine museng;
     Q_INVOKABLE void playSound();
