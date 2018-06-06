@@ -6,6 +6,7 @@ import "src/bars"
 import "src/buttons"
 import "src/variables/fontawesome.js" as FontAwesome
 import io.qt.examples.initializeengine 1.0
+
 ApplicationWindow {
     id: myApp
     visible: true
@@ -37,6 +38,7 @@ ApplicationWindow {
                     popup.open()
                 }
             }
+
 
         }
 
@@ -80,6 +82,7 @@ ApplicationWindow {
                }
            }
        }
+
     Grid {
         columns: 2
         spacing: 0
@@ -200,140 +203,34 @@ ApplicationWindow {
 
         Grid {
 
-            width: parent.width
-            height: parent.height/1.5
-            rows: 2
+            width: parent.width/1.3
+            height: parent.height/1.1
 
            Row{
              id: commands
-               width:parent.width
-            ButtonDefault {
+             width:parent.width
+            Button{
+                width:parent.width/5
                 text: "Previous"
             }
-            ButtonDefault {
+            Button{
+                width:parent.width/5
                 text: "Play"
             }
-            ButtonDefault {
+            Button{
+                width:parent.width/5
                 text: "Next"
             }
-            ButtonDefault {
+            Button{
+                width:parent.width/5
                 text: "Loop"
             }
-            ButtonDefault {
+            Button{
+                width:parent.width/5
                 text: "Shuffle"
             }
+
           }
-           ScrollView {
-               width: parent.width
-               height: parent.height
-
-               ListView {
-                   model: ListModel {
-                       ListElement {
-                           _id: "bella"
-                           text: "Bill Smith"
-                           number: "555 3264"
-                       }
-                       ListElement {
-                           text: "John Brown"
-                           number: "555 8426"
-                       }
-                       ListElement {
-                           text: "Sam Wise"
-                           number: "555 0473"
-                       }
-                       ListElement {
-                           text: "Bill Smith"
-                           number: "555 3264"
-                       }
-                       ListElement {
-                           text: "John Brown"
-                           number: "555 8426"
-                       }
-                       ListElement {
-                           text: "Sam Wise"
-                           number: "555 0473"
-                       }
-                       ListElement {
-                           text: "Bill Smith"
-                           number: "555 3264"
-                       }
-                       ListElement {
-                           text: "John Brown"
-                           number: "555 8426"
-                       }
-                       ListElement {
-                           text: "Sam Wise"
-                           number: "555 0473"
-                       }
-                       ListElement {
-                           text: "Bill Smith"
-                           number: "555 3264"
-                       }
-                       ListElement {
-                           text: "John Brown"
-                           number: "555 8426"
-                       }
-                       ListElement {
-                           text: "Sam Wise"
-                           number: "555 0473"
-                       }
-                       ListElement {
-                           text: "Bill Smith"
-                           number: "555 3264"
-                       }
-                       ListElement {
-                           text: "John Brown"
-                           number: "555 8426"
-                       }
-                       ListElement {
-                           text: "Sam Wise"
-                           number: "555 0473"
-                       }
-                       ListElement {
-                           text: "Bill Smith"
-                           number: "555 3264"
-                       }
-                       ListElement {
-                           text: "John Brown"
-                           number: "555 8426"
-                       }
-                       ListElement {
-                           text: "Sam Wise"
-                           number: "555 0473"
-                       }
-                       ListElement {
-                           text: "Bill Smith"
-                           number: "555 3264"
-                       }
-                       ListElement {
-                           text: "John Brown"
-                           number: "555 8426"
-                       }
-                       ListElement {
-                           text: "Sam Wise"
-                           number: "555 0473"
-                       }
-                       ListElement {
-                           text: "haha"
-                           number: "555 0473"
-                       }
-
-
-                   }
-                   delegate: Button {
-                       width: parent.width
-                       height: 50
-                       text: number
-                       font.pixelSize: 15
-                       background: null
-                       onClicked: {
-                           console.log(_id)
-                       }
-                   }
-
-               }
-           }
 
         }
 
