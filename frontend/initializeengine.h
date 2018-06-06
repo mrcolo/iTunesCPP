@@ -2,7 +2,7 @@
 #define INITIALIZEENGINE_H
 #include <QObject>
 #include "../backend/soundengine/musicengine.h"
-
+#include <QString>
 class InitializeEngine :
         public QObject
 {
@@ -11,10 +11,9 @@ public:
      InitializeEngine();
     ~InitializeEngine();
     musicEngine* museng;
-    //musicEngine museng;
+    bool isPlaying = false;
     Q_INVOKABLE void playSound();
-    Q_INVOKABLE void setCurrent(std::string path);
-    Q_INVOKABLE void pauseSound();
+    Q_INVOKABLE void setCurrent(QString path);
 };
 
 #endif // INITIALIZEENGINE_H

@@ -73,9 +73,9 @@ ApplicationWindow {
                    }
                    onDropped: {
                        console.log ("onDropped");
-                       museng.setCurrent(drop.urls.toString)
-
+                       museng.setCurrent(drop.urls[0])
                        inputArea.text = "Drag a Song here"
+                       popup.close();
                    }
                }
            }
@@ -194,10 +194,21 @@ ApplicationWindow {
 
                 }
                 delegate: Button {
+                    id: control
                     width: parent.width
                     height: 50
                     text: number
                     font.pixelSize: 15
+                    contentItem: Text {
+                            text: control.text
+                            font: control.font
+                            opacity: enabled ? 1.0 : 0.3
+                            color: control.down ? "#75bcff" : "#1386f2"
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                            elide: Text.ElideRight
+                        }
+
                     background: null
                     onClicked: {
                         console.log(_id)
@@ -262,7 +273,7 @@ ApplicationWindow {
              ScrollView {
                  anchors.top: addPlaylist.bottom
                  width: parent.width
-                 padding: 50
+                 padding: 0
                  height:600
 
                  ListView {
@@ -359,10 +370,30 @@ ApplicationWindow {
 
 
                      }
-                     delegate: ButtonDefault {
-                         width: parent.width
-                         height: 50
+                     delegate: Button {
+                         id: control2
+                         width: parent.width + 50
+                         height: 40
                          text: number
+                         font.pixelSize: 15
+                         contentItem: Text {
+                                 text: control2.text
+                                 font: control2.font
+                                 opacity: enabled ? 1.0 : 0.3
+                                 color: control2.down ? "#75bcff" : "#1386f2"
+                                 horizontalAlignment: Text.AlignLeft
+                                 verticalAlignment: Text.AlignVCenter
+                                 elide: Text.ElideRight
+                             }
+
+                         background: Rectangle {
+                                         implicitWidth: parent.width
+                                         implicitHeight: 5
+                                         opacity: enabled ? 1 : 0.3
+                                         border.color: control2.down ? "dbd9d9" : "#f2f2f2"
+                                         border.width: 0.5
+                                         radius: 1
+                                     }
                          onClicked: {
                              console.log(_id)
                          }

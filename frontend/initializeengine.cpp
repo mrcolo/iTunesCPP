@@ -15,12 +15,16 @@ InitializeEngine::~InitializeEngine()
 }
 
 void InitializeEngine::playSound(){
-        museng->play();
+        if(isPlaying)
+            museng->pause();
+        else
+            museng->play();
+
+        isPlaying = !isPlaying;
+
 }
 
-void InitializeEngine::pauseSound(){
-        museng->pause();
-}
-void InitializeEngine::setCurrent(std::string path){
-    museng->setWhatToPlay(path);
+void InitializeEngine::setCurrent(QString path){
+
+    museng->setWhatToPlay(path.toStdString());
 }
