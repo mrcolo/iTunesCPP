@@ -22,6 +22,7 @@ ApplicationWindow {
     header: Bar{
         id: titleBar
         leftComponent:Slider {
+            width: 100
             from: 1
             value: 100
             to: 100
@@ -48,9 +49,9 @@ ApplicationWindow {
 
     Popup {
            id: popup
-           x: myApp.width - 200
+           x: myApp.width - 310
            y: titleBar.y
-           width: parent.width/4
+           width: 300
            height: parent.height/4
            modal: false
            focus: true
@@ -229,6 +230,123 @@ ApplicationWindow {
                 width:parent.width/5
                 text: "Shuffle"
             }
+
+          }
+           Row{
+             anchors.top: commands.bottom
+             id: commands2
+             width:parent.width
+
+             ScrollView {
+                 width: parent.width
+                 padding: 50
+                 height:800
+
+                 ListView {
+                     model: ListModel {
+                         ListElement {
+                             _id: "bella"
+                             text: "Bill Smith"
+                             number: "555 3264"
+                         }
+                         ListElement {
+                             text: "John Brown"
+                             number: "555 8426"
+                         }
+                         ListElement {
+                             text: "Sam Wise"
+                             number: "555 0473"
+                         }
+                         ListElement {
+                             text: "Bill Smith"
+                             number: "555 3264"
+                         }
+                         ListElement {
+                             text: "John Brown"
+                             number: "555 8426"
+                         }
+                         ListElement {
+                             text: "Sam Wise"
+                             number: "555 0473"
+                         }
+                         ListElement {
+                             text: "Bill Smith"
+                             number: "555 3264"
+                         }
+                         ListElement {
+                             text: "John Brown"
+                             number: "555 8426"
+                         }
+                         ListElement {
+                             text: "Sam Wise"
+                             number: "555 0473"
+                         }
+                         ListElement {
+                             text: "Bill Smith"
+                             number: "555 3264"
+                         }
+                         ListElement {
+                             text: "John Brown"
+                             number: "555 8426"
+                         }
+                         ListElement {
+                             text: "Sam Wise"
+                             number: "555 0473"
+                         }
+                         ListElement {
+                             text: "Bill Smith"
+                             number: "555 3264"
+                         }
+                         ListElement {
+                             text: "John Brown"
+                             number: "555 8426"
+                         }
+                         ListElement {
+                             text: "Sam Wise"
+                             number: "555 0473"
+                         }
+                         ListElement {
+                             text: "Bill Smith"
+                             number: "555 3264"
+                         }
+                         ListElement {
+                             text: "John Brown"
+                             number: "555 8426"
+                         }
+                         ListElement {
+                             text: "Sam Wise"
+                             number: "555 0473"
+                         }
+                         ListElement {
+                             text: "Bill Smith"
+                             number: "555 3264"
+                         }
+                         ListElement {
+                             text: "John Brown"
+                             number: "555 8426"
+                         }
+                         ListElement {
+                             text: "Sam Wise"
+                             number: "555 0473"
+                         }
+                         ListElement {
+                             text: "haha"
+                             number: "555 0473"
+                         }
+
+
+                     }
+                     delegate: ButtonDefault {
+                         width: parent.width
+                         height: 50
+                         text: number
+                         onClicked: {
+                             console.log(_id)
+                         }
+                     }
+
+                 }
+             }
 
           }
 

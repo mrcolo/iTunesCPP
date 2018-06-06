@@ -5,7 +5,7 @@
 InitializeEngine::InitializeEngine()
 {
     museng = new musicEngine();
-    museng->setWhatToPlay("../../../../example.wav");
+    museng->setWhatToPlay("../../../../example.mp3");
 }
 
 InitializeEngine::~InitializeEngine()

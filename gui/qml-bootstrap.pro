@@ -63,3 +63,13 @@ DEPENDPATH += $$PWD/irrKlang-64bit-1.6.0/bin/macosx-gcc
 INCLUDEPATH += $$PWD/irrKlang-64bit-1.6.0/include
 DEPENDPATH += $$PWD/irrKlang-64bit-1.6.0/include
 
+mac {
+  Resources.files += "irrKlang-64bit-1.6.0/bin/macosx-gcc/libirrklang.dylib"
+  Resources.files += "irrKlang-64bit-1.6.0/bin/macosx-gcc/ikpFLAC.dylib"
+  Resources.files += "irrKlang-64bit-1.6.0/bin/macosx-gcc/ikpMP3.dylib"
+# you can put more of these as you need, and it can even copy folders
+# Resources.files += what you need
+  Resources.path = Contents/MacOS
+  QMAKE_BUNDLE_DATA += Resources
+}
+
