@@ -5,6 +5,11 @@ playlist::playlist()
 
 }
 
+void playlist::writeToJson()
+{
+
+}
+
 void playlist::readJson()
 {
   QString val;

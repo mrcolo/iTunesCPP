@@ -3,8 +3,10 @@ TEMPLATE = app
 QT += qml quick widgets
 
 SOURCES += main.cpp \
-		../backend/soundengine/musicengine.cpp \
-        ../frontend/initializeengine.cpp
+        ../backend/soundengine/musicengine.cpp \
+        ../frontend/initializeengine.cpp \
+        ../frontend/song.cpp \
+        ../frontend/playlist.cpp
 
 RESOURCES += qml.qrc
 OTHER_FILES += \
@@ -53,7 +55,9 @@ QMAKE_MAC_SDK = macosx10.9
 include(deployment.pri)
 
 HEADERS += ../backend/soundengine/musicengine.h \
-            ../frontend/initializeengine.h
+           ../frontend/initializeengine.h \
+           ../frontend/song.h \
+           ../frontend/playlist.h
 
 macx: LIBS += -L$$PWD/irrKlang-64bit-1.6.0/bin/macosx-gcc/ -lirrklang
 

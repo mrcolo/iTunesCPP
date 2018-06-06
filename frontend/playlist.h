@@ -9,10 +9,11 @@ class playlist
 {
 public:
     playlist();
-
-private:
     void readJson();
     void writeToJson();
+private:
+    vector<song> list;
+
 };
 
 #endif // PLAYLIST_H
