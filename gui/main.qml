@@ -1,104 +1,353 @@
 import QtQuick 2.3
-import QtQuick.Controls 1.2
+import QtQuick.Controls 2.2
+
 import "src/lists"
 import "src/bars"
 import "src/buttons"
 import "src/variables/fontawesome.js" as FontAwesome
 import io.qt.examples.initializeengine 1.0
 ApplicationWindow {
+    id: myApp
     visible: true
     width: 800
     height: 1280
+
     FontLoader{ source: "qrc:/src/fonts/fontawesome-webfont.ttf"}
+
     Rectangle {
         anchors.fill: parent
     }
-    toolBar: Bar{
+
+    header: Bar{
         id: titleBar
-        leftComponent: Component{
+        leftComponent:Slider {
+            from: 1
+            value: 100
+            to: 100
+        }
+        rightComponent: Component{
+
             ButtonDefault{
+                id: test
                 class_name: "bar dark clear"
-                text: "Back"
-                icon: FontAwesome.icons.fa_angle_left
-                opacity: stackView.depth > 1 ? 1 : 0
-                visible: opacity ? true : false
-                Behavior on opacity { NumberAnimation{} }
+                text: "Add Song"
+                icon: FontAwesome.icons.fa_music
                 onClicked: {
-                    stackView.pop()
-                    titleBar.title = "Qml Bootstrap Demo"
+                   museng.playSound()
+                    popup.open()
                 }
             }
+
         }
 
         class_name: "header"
-        title: "Qml Bootstrap Demo"
+        title: "🔥 myMusic 🔥"
     }
 
-    ListModel {
-        id: pageModel
-        ListElement {
-            text: "Buttons Demo"
-            page: "src/examples/ButtonPage.qml"
-        }
-        ListElement {
-            text: "ListView Demo"
-            page: "src/examples/DefaultListPage.qml"
-        }
-        ListElement {
-            text: "ListView with icon Demo"
-            page: "src/examples/IconListPage.qml"
-        }
-        ListElement {
-            text: "Avatar ListView Demo"
-            page: "src/examples/AvatarListPage.qml"
-        }
-        ListElement {
-            text: "Thumnail ListView Demo"
-            page: "src/examples/ThumbnailListPage.qml"
-        }
-        ListElement {
-            text: "Button bar Demo"
-            page: "src/examples/ButtonBarPage.qml"
-        }
-        ListElement {
-            text: "Card"
-            page: "src/examples/CardPage.qml"
-        }
-    }
+    Popup {
+           id: popup
+           x: myApp.width - 200
+           y: titleBar.y
+           width: parent.width/4
+           height: parent.height/4
+           modal: false
+           focus: true
+           closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
+           Text{
+            x:parent.width/2 - 50
+            y:parent.height/2 - 10
+            text:"Drag a Song here "
+           }
+           Rectangle {
+               id: background;
+               color: "blue";
+               width: parent.width;
+               height: parent.height;
 
-    StackView {
-        id: stackView
-        anchors.fill: parent
-        focus: true
-        Keys.onReleased: if (event.key === Qt.Key_Back && stackView.depth > 1) {
-                             stackView.pop();
-                             event.accepted = true;
-                         }
+               DropArea {
+                   id: dropArea;
+                   anchors.fill: parent;
+                   onEntered: {
+                       background.color = "gray";
+                       drag.accept (Qt.CopyAction);
+                       console.log("onEntered");
+                   }
+                   onDropped: {
+                       console.log ("onDropped");
+                       background.color = "blue";
+                   }
+                   onExited: {
+                       bckground.color = "white";
+                       console.log ("onExited");
+                   }
+               }
+           }
+       }
+    Grid {
+        columns: 2
+        spacing: 0
+        width: parent.width
+        height: parent.height
 
-        initialItem: Item {
-            width: parent.width
+        ScrollView {
+            width: parent.width/4
             height: parent.height
-            DefaultListView{
-                model: pageModel
-                anchors.fill: parent
-                onItemClicked: {
-                    stackView.push(Qt.resolvedUrl(item.page))
-                    titleBar.title = item.text
+
+            ListView {
+                model: ListModel {
+                    ListElement {
+                        _id: "bella"
+                        text: "Bill Smith"
+                        number: "555 3264"
+                    }
+                    ListElement {
+                        text: "John Brown"
+                        number: "555 8426"
+                    }
+                    ListElement {
+                        text: "Sam Wise"
+                        number: "555 0473"
+                    }
+                    ListElement {
+                        text: "Bill Smith"
+                        number: "555 3264"
+                    }
+                    ListElement {
+                        text: "John Brown"
+                        number: "555 8426"
+                    }
+                    ListElement {
+                        text: "Sam Wise"
+                        number: "555 0473"
+                    }
+                    ListElement {
+                        text: "Bill Smith"
+                        number: "555 3264"
+                    }
+                    ListElement {
+                        text: "John Brown"
+                        number: "555 8426"
+                    }
+                    ListElement {
+                        text: "Sam Wise"
+                        number: "555 0473"
+                    }
+                    ListElement {
+                        text: "Bill Smith"
+                        number: "555 3264"
+                    }
+                    ListElement {
+                        text: "John Brown"
+                        number: "555 8426"
+                    }
+                    ListElement {
+                        text: "Sam Wise"
+                        number: "555 0473"
+                    }
+                    ListElement {
+                        text: "Bill Smith"
+                        number: "555 3264"
+                    }
+                    ListElement {
+                        text: "John Brown"
+                        number: "555 8426"
+                    }
+                    ListElement {
+                        text: "Sam Wise"
+                        number: "555 0473"
+                    }
+                    ListElement {
+                        text: "Bill Smith"
+                        number: "555 3264"
+                    }
+                    ListElement {
+                        text: "John Brown"
+                        number: "555 8426"
+                    }
+                    ListElement {
+                        text: "Sam Wise"
+                        number: "555 0473"
+                    }
+                    ListElement {
+                        text: "Bill Smith"
+                        number: "555 3264"
+                    }
+                    ListElement {
+                        text: "John Brown"
+                        number: "555 8426"
+                    }
+                    ListElement {
+                        text: "Sam Wise"
+                        number: "555 0473"
+                    }
+                    ListElement {
+                        text: "haha"
+                        number: "555 0473"
+                    }
+
+
                 }
+                delegate: Button {
+                    width: parent.width
+                    height: 50
+                    text: number
+                    font.pixelSize: 15
+                    background: null
+                    onClicked: {
+                        console.log(_id)
+                    }
+                }
+
             }
         }
+
+        Grid {
+
+            width: parent.width
+            height: parent.height/1.5
+            rows: 2
+
+           Row{
+             id: commands
+               width:parent.width
+            ButtonDefault {
+                text: "Previous"
+            }
+            ButtonDefault {
+                text: "Play"
+            }
+            ButtonDefault {
+                text: "Next"
+            }
+            ButtonDefault {
+                text: "Loop"
+            }
+            ButtonDefault {
+                text: "Shuffle"
+            }
+          }
+           ScrollView {
+               width: parent.width
+               height: parent.height
+
+               ListView {
+                   model: ListModel {
+                       ListElement {
+                           _id: "bella"
+                           text: "Bill Smith"
+                           number: "555 3264"
+                       }
+                       ListElement {
+                           text: "John Brown"
+                           number: "555 8426"
+                       }
+                       ListElement {
+                           text: "Sam Wise"
+                           number: "555 0473"
+                       }
+                       ListElement {
+                           text: "Bill Smith"
+                           number: "555 3264"
+                       }
+                       ListElement {
+                           text: "John Brown"
+                           number: "555 8426"
+                       }
+                       ListElement {
+                           text: "Sam Wise"
+                           number: "555 0473"
+                       }
+                       ListElement {
+                           text: "Bill Smith"
+                           number: "555 3264"
+                       }
+                       ListElement {
+                           text: "John Brown"
+                           number: "555 8426"
+                       }
+                       ListElement {
+                           text: "Sam Wise"
+                           number: "555 0473"
+                       }
+                       ListElement {
+                           text: "Bill Smith"
+                           number: "555 3264"
+                       }
+                       ListElement {
+                           text: "John Brown"
+                           number: "555 8426"
+                       }
+                       ListElement {
+                           text: "Sam Wise"
+                           number: "555 0473"
+                       }
+                       ListElement {
+                           text: "Bill Smith"
+                           number: "555 3264"
+                       }
+                       ListElement {
+                           text: "John Brown"
+                           number: "555 8426"
+                       }
+                       ListElement {
+                           text: "Sam Wise"
+                           number: "555 0473"
+                       }
+                       ListElement {
+                           text: "Bill Smith"
+                           number: "555 3264"
+                       }
+                       ListElement {
+                           text: "John Brown"
+                           number: "555 8426"
+                       }
+                       ListElement {
+                           text: "Sam Wise"
+                           number: "555 0473"
+                       }
+                       ListElement {
+                           text: "Bill Smith"
+                           number: "555 3264"
+                       }
+                       ListElement {
+                           text: "John Brown"
+                           number: "555 8426"
+                       }
+                       ListElement {
+                           text: "Sam Wise"
+                           number: "555 0473"
+                       }
+                       ListElement {
+                           text: "haha"
+                           number: "555 0473"
+                       }
+
+
+                   }
+                   delegate: Button {
+                       width: parent.width
+                       height: 50
+                       text: number
+                       font.pixelSize: 15
+                       background: null
+                       onClicked: {
+                           console.log(_id)
+                       }
+                   }
+
+               }
+           }
+
+        }
+
     }
+
     InitializeEngine{
         id: museng
     }
-    ButtonDefault{
-        text: "click me"
-        onClicked: {
-            museng.playSound()
-        }
-    }
-    statusBar: Bar{
-        class_name: "footer calm"
-        title: "Powered by Brexis and Kamhix"
+
+    footer: Bar{
+        class_name: "footer energized"
+        title: "Made with ❤️  by Francesco, Arman, and Ryan"
     }
 }

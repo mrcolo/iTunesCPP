@@ -2,7 +2,7 @@
 #define INITIALIZEENGINE_H
 #include <QObject>
 #include "../backend/soundengine/musicengine.h"
-#include <QDir>
+
 class InitializeEngine :
         public QObject
 {
@@ -10,7 +10,7 @@ class InitializeEngine :
 public:
      InitializeEngine();
     ~InitializeEngine();
-    QDir dir;
+
     musicEngine* museng;
     //musicEngine museng;
     Q_INVOKABLE void playSound();
