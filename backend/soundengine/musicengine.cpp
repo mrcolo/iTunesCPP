@@ -74,6 +74,10 @@ void musicEngine::loop(bool yes)
 
 }
 
+void musicEngine::shuffle(bool yes){
+
+}
+
 void musicEngine::play()
 {
     engine->stopAllSounds();

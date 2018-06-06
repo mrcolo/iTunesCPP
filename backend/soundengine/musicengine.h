@@ -41,6 +41,7 @@ class musicEngine
 
         void play();
         void loop(bool yes);
+        void shuffle(bool yes);
         void pause ();
         void stop ();
         void fastForward();
