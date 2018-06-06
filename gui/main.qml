@@ -95,28 +95,23 @@ ApplicationWindow {
 
         ScrollView {
             id: viewPlaylist
-            padding: 30
+            topPadding: 30
             width: parent.width/4
             height: parent.height
 
             ListView {
                 model: ListModel {
                     ListElement {
-                        _id: "bella"
-                        text: "Bill Smith"
-                        number: "555 3264"
-                    }
-                    ListElement {
                         text: "John Brown"
-                        number: "555 8426"
+                        number: "My Library"
                     }
                     ListElement {
                         text: "Sam Wise"
-                        number: "555 0473"
+                        number: "Alternative Tunes"
                     }
                     ListElement {
                         text: "Bill Smith"
-                        number: "555 3264"
+                        number: "Chill Vibes"
                     }
                     ListElement {
                         text: "John Brown"
@@ -196,20 +191,27 @@ ApplicationWindow {
                 delegate: Button {
                     id: control
                     width: parent.width
-                    height: 50
+                    height: 45
                     text: number
                     font.pixelSize: 15
                     contentItem: Text {
                             text: control.text
                             font: control.font
                             opacity: enabled ? 1.0 : 0.3
-                            color: control.down ? "#75bcff" : "#1386f2"
+                            color: control.down ? "#75bcff" : "#515151"
                             horizontalAlignment: Text.AlignHCenter
                             verticalAlignment: Text.AlignVCenter
                             elide: Text.ElideRight
                         }
 
-                    background: null
+                    background: Rectangle {
+                                    implicitWidth: parent.width
+                                    implicitHeight: 5
+                                    opacity: enabled ? 1 : 0.3
+                                    border.color: control.down ? "#ededed" : "#f9f9f9"
+                                    border.width: 0.5
+                                    radius: 1
+                                }
                     onClicked: {
                         console.log(_id)
                     }
