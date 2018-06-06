@@ -21,3 +21,6 @@ void InitializeEngine::playSound(){
 void InitializeEngine::pauseSound(){
         museng->pause();
 }
+void InitializeEngine::setCurrent(std::string path){
+    museng->setWhatToPlay(path);
+}

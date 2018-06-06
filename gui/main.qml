@@ -73,8 +73,8 @@ ApplicationWindow {
                    }
                    onDropped: {
                        console.log ("onDropped");
-                       museng.currentPath = drop.urls
-                       console.log(museng.currentPath)
+                       museng.setCurrent(drop.urls.toString)
+
                        inputArea.text = "Drag a Song here"
                    }
                }

@@ -10,10 +10,10 @@ class InitializeEngine :
 public:
      InitializeEngine();
     ~InitializeEngine();
-    string currentPath;
     musicEngine* museng;
     //musicEngine museng;
     Q_INVOKABLE void playSound();
+    Q_INVOKABLE void setCurrent(std::string path);
     Q_INVOKABLE void pauseSound();
 };
 
