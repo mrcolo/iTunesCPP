@@ -6,7 +6,8 @@ SOURCES += main.cpp \
         ../backend/soundengine/musicengine.cpp \
         ../frontend/initializeengine.cpp \
         ../frontend/song.cpp \
-        ../frontend/playlist.cpp
+        ../frontend/playlist.cpp \
+    ../frontend/library.cpp
 
 RESOURCES += qml.qrc
 OTHER_FILES += \
@@ -57,7 +58,8 @@ include(deployment.pri)
 HEADERS += ../backend/soundengine/musicengine.h \
            ../frontend/initializeengine.h \
            ../frontend/song.h \
-           ../frontend/playlist.h
+           ../frontend/playlist.h \
+    ../frontend/library.h
 
 macx: LIBS += -L$$PWD/irrKlang-64bit-1.6.0/bin/macosx-gcc/ -lirrklang
 
