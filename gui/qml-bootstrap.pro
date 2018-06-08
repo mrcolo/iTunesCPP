@@ -79,3 +79,8 @@ mac {
   QMAKE_BUNDLE_DATA += Resources
 }
 
+
+macx: LIBS += -L$$PWD/../backend/taglib/1.11.1/lib/ -ltag.1.17.0
+
+INCLUDEPATH += $$PWD/../backend/taglib/1.11.1/include/taglib
+DEPENDPATH += $$PWD/../backend/taglib/1.11.1/include/taglib

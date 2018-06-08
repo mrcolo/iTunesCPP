@@ -10,6 +10,13 @@
 #include <QFileDialog>
 #include <QFileInfo>
 
+//included for taglib
+#include <iomanip>
+#include <stdio.h>
+#include <tag.h>
+#include <fileref.h>
+#include <tpropertymap.h>
+
 using namespace std;
 
 class song
@@ -27,6 +34,9 @@ private:
     QString artist;
     QString album;
     QString path;
+
+    TagLib::FileRef songf;
+
 };
 
 #endif // SONG_H
