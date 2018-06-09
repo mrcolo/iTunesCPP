@@ -226,48 +226,6 @@ ApplicationWindow {
             height: parent.height/1.1
 
            Row{
-             id: commands
-             width:parent.width
-
-            Button{
-                width:parent.width/6
-                text: "Previous"
-                padding:20
-            }
-            Button{
-                width:parent.width/6
-                text: "Play"
-                padding:20
-                onClicked: {
-                    museng.playSound()
-                }
-            }
-            Button{
-                width:parent.width/6
-                text: "Pause"
-                padding:20
-                onClicked: {
-                    museng.pauseSound()
-                }
-            }
-            Button{
-                width:parent.width/6
-                text: "Next"
-                padding:20
-            }
-            Button{
-                width:parent.width/6
-                text: "Loop"
-                padding:20
-            }
-            Button{
-                width:parent.width/6
-                text: "Shuffle"
-                padding:20
-            }
-
-          }
-           Row{
              anchors.top: commands.bottom
              id: commands2
              width:parent.width
@@ -331,8 +289,51 @@ ApplicationWindow {
         }
     }
 
-    footer: Bar{
-        class_name: "footer energized"
-        title: "Made with ❤️  by Francesco, Arman, and Ryan"
-    }
+    footer: Row{
+        id: commands
+        width:parent.width
+        Button{
+            width:parent.width/5
+            icon.source: "qrc:/src/icons/loop.svg"
+            padding:20
+        }
+       Button{
+           width:parent.width/5
+           icon.source: "qrc:/src/icons/previous.svg"
+           padding:20
+       }
+       Button{
+           id:playButton
+           property bool isPlaying: false
+           width:parent.width/5
+           icon.source: !isPlaying ? "qrc:/src/icons/play.svg" : "qrc:/src/icons/pause.svg"
+           padding:20
+           onClicked: {
+                console.log(isPlaying,museng.isPlaying())
+
+                if(!isPlaying && !museng.isPlaying())
+                    museng.playSound();
+                else{
+                    if( museng.isPlaying())
+                        museng.pauseSound();
+
+                }
+
+               isPlaying = !isPlaying;
+           }
+       }
+       Button{
+           width:parent.width/5
+           icon.source: "qrc:/src/icons/next.svg"
+           padding:20
+       }
+       Button{
+           width:parent.width/5
+           icon.source: "qrc:/src/icons/shuffle.svg"
+           padding:20
+
+       }
+
+
+     }
 }

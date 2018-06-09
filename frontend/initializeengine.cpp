@@ -18,13 +18,26 @@ InitializeEngine::~InitializeEngine()
 }
 
 void InitializeEngine::playSound(){
-         museng->play();
-
-        isPlaying = !isPlaying;
+    musicIsPlaying = true;
+    museng->play();
 
 }
 
+void InitializeEngine::pauseSound(){
+    museng->pause();
+}
+
+
+
+bool InitializeEngine::isPlaying(){
+    if(musicIsPlaying)
+        return true;
+    else
+        return false;
+}
+
 void InitializeEngine::setCurrent(QString path){
+
     string myPath = path.toStdString();
     //account for anything that is not mp3 or wav or flac
     museng->setWhatToPlay(myPath.substr(8, myPath.length()-8));

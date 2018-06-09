@@ -13,8 +13,10 @@ public:
      InitializeEngine();
     ~InitializeEngine();
     musicEngine* museng;
-    bool isPlaying = false;
+    bool musicIsPlaying = false;
     Q_INVOKABLE void playSound();
+    Q_INVOKABLE bool isPlaying();
+    Q_INVOKABLE void pauseSound();
     Q_INVOKABLE void setCurrent(QString path);
     Q_INVOKABLE QJsonObject getLibrary();
     Q_INVOKABLE QJsonObject getPlaylist();
