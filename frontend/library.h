@@ -1,6 +1,9 @@
 #ifndef LIBRARY_H
 #define LIBRARY_H
+#include <iostream>
+#include "playlist.h"
 
+using namespace std;
 
 class library
 {
