@@ -279,104 +279,16 @@ ApplicationWindow {
                  height:600
 
                  ListView {
-                     model: ListModel {
-                         ListElement {
-                             _id: "bella"
-                             text: "Bill Smith"
-                             number: "555 3264"
-                         }
-                         ListElement {
-                             text: "John Brown"
-                             number: "555 8426"
-                         }
-                         ListElement {
-                             text: "Sam Wise"
-                             number: "555 0473"
-                         }
-                         ListElement {
-                             text: "Bill Smith"
-                             number: "555 3264"
-                         }
-                         ListElement {
-                             text: "John Brown"
-                             number: "555 8426"
-                         }
-                         ListElement {
-                             text: "Sam Wise"
-                             number: "555 0473"
-                         }
-                         ListElement {
-                             text: "Bill Smith"
-                             number: "555 3264"
-                         }
-                         ListElement {
-                             text: "John Brown"
-                             number: "555 8426"
-                         }
-                         ListElement {
-                             text: "Sam Wise"
-                             number: "555 0473"
-                         }
-                         ListElement {
-                             text: "Bill Smith"
-                             number: "555 3264"
-                         }
-                         ListElement {
-                             text: "John Brown"
-                             number: "555 8426"
-                         }
-                         ListElement {
-                             text: "Sam Wise"
-                             number: "555 0473"
-                         }
-                         ListElement {
-                             text: "Bill Smith"
-                             number: "555 3264"
-                         }
-                         ListElement {
-                             text: "John Brown"
-                             number: "555 8426"
-                         }
-                         ListElement {
-                             text: "Sam Wise"
-                             number: "555 0473"
-                         }
-                         ListElement {
-                             text: "Bill Smith"
-                             number: "555 3264"
-                         }
-                         ListElement {
-                             text: "John Brown"
-                             number: "555 8426"
-                         }
-                         ListElement {
-                             text: "Sam Wise"
-                             number: "555 0473"
-                         }
-                         ListElement {
-                             text: "Bill Smith"
-                             number: "555 3264"
-                         }
-                         ListElement {
-                             text: "John Brown"
-                             number: "555 8426"
-                         }
-                         ListElement {
-                             text: "Sam Wise"
-                             number: "555 0473"
-                         }
-                         ListElement {
-                             text: "haha"
-                             number: "555 0473"
-                         }
-
-
+                     Component.onCompleted: {
+                         for(var song in museng.myLibrary.library)
+                             library.append(museng.myLibrary.library[song]);
                      }
+                     model: ListModel { id: library}
                      delegate: Button {
                          id: control2
                          width: parent.width + 50
                          height: 40
-                         text: number
+                         text: title
                          font.pixelSize: 15
                          contentItem: Text {
                                  text: control2.text
@@ -397,7 +309,7 @@ ApplicationWindow {
                                          radius: 1
                                      }
                          onClicked: {
-                             console.log(_id)
+                             console.log(artist)
                          }
                      }
 
@@ -412,6 +324,11 @@ ApplicationWindow {
 
     InitializeEngine{
         id: museng
+        property var myLibrary : []
+        Component.onCompleted: {
+            myLibrary = museng.getLibrary()
+
+        }
     }
 
     footer: Bar{
