@@ -1,6 +1,9 @@
 #include "initializeengine.h"
 #include "../backend/soundengine/musicengine.h"
 #include <iostream>
+#include <QFile>
+#include <QJsonObject>
+#include <QJsonDocument>
 
 InitializeEngine::InitializeEngine()
 {
@@ -26,3 +29,37 @@ void InitializeEngine::setCurrent(QString path){
     //account for anything that is not mp3 or wav or flac
     museng->setWhatToPlay(myPath.substr(8, myPath.length()-8));
 }
+
+QJsonObject InitializeEngine::getLibrary(){
+
+       QString val;
+       QFile file;
+
+       file.setFileName("../../../../backend/library.json");
+       file.open(QIODevice::ReadOnly | QIODevice::Text);
+
+       val = file.readAll();
+       file.close();
+
+       QJsonDocument d = QJsonDocument::fromJson(val.toUtf8());
+
+       QJsonObject sett2 = d.object();
+
+
+
+        /*
+       qWarning() << tr("QJsonObject[appName] of description: ") << item["description"];
+       QJsonValue subobj = item["description"];
+       qWarning() << subobj.toString();
+
+       qWarning() << tr("QJsonObject[appName] of value: ") << item["imp"];
+       QJsonArray test = item["imp"].toArray();
+       qWarning() << test[1].toString();
+       */
+       return sett2;
+}
+
+QJsonObject InitializeEngine::getPlaylist(){
+
+}
+

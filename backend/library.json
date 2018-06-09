@@ -1,0 +1,16 @@
+{
+  "library": {
+    "123" : {
+      "title": "We Will Rock You",
+      "artist": "Queen"
+    },
+    "456": {
+      "title": "fuck",
+      "artist": "thisbitch"
+    },
+    "678": {
+      "title": "you",
+      "artist": "fuckyoutoo"
+    }
+  }
+}
