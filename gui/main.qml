@@ -22,10 +22,15 @@ ApplicationWindow {
     header: Bar{
         id: titleBar
         leftComponent:Slider {
-            width: 100
+            id:volume
+            width: 200
             from: 1
             value: 100
             to: 100
+            onMoved: {
+                museng.setVolume(volume.value)
+            }
+
         }
         rightComponent: Component{
 
@@ -58,6 +63,7 @@ ApplicationWindow {
             y:parent.height/2 - 10
             text:"Drag a Song here "
            }
+
            Rectangle {
                id: background;
                color: "transparent";
@@ -80,6 +86,47 @@ ApplicationWindow {
                }
            }
        }
+    Rectangle{
+
+        width: parent.width
+        height:addPlaylist.height*2
+        id: bella
+       color: "#E0E0E0"
+
+       anchors.top: addPlaylist.bottom
+       Text{
+        id: textCurrentSong
+        text:"We Will Rock You - Queen"
+        x: parent.width/2-80
+        y: parent.height/2-30
+       }
+       Text{
+        property int myCurrentTime : 23
+        id: remainingSong
+        text: "0:" + myCurrentTime
+        anchors.right: pointLength.left
+        y: pointLength.y +10
+
+       }
+
+       Slider {
+            id: pointLength
+           anchors.top: textCurrentSong.bottom
+           x: textCurrentSong.x - 170
+           width: 500
+           from: 1
+           value: remainingSong.myCurrentTime
+           to: 100
+       }
+       Text{
+        property string myTotalTime : "4:23"
+        id: totalSong
+        text: myTotalTime
+        anchors.left: pointLength.right
+        y: pointLength.y +10
+       }
+
+    }
     ButtonDefault{
         class_name: "energized"
         width: parent.width
@@ -91,11 +138,11 @@ ApplicationWindow {
         spacing: 0
         width: parent.width
         height: parent.height
-        anchors.top: addPlaylist.bottom
-
+        anchors.top: bella.bottom
         ScrollView {
             id: viewPlaylist
-            topPadding: 30
+
+            topPadding:20
             width: parent.width/4
             height: parent.height
 
@@ -226,56 +273,14 @@ ApplicationWindow {
             height: parent.height/1.1
 
            Row{
-             id: commands
-             width:parent.width
 
-            Button{
-                width:parent.width/6
-                text: "Previous"
-                padding:20
-            }
-            Button{
-                width:parent.width/6
-                text: "Play"
-                padding:20
-                onClicked: {
-                    museng.playSound()
-                }
-            }
-            Button{
-                width:parent.width/6
-                text: "Pause"
-                padding:20
-                onClicked: {
-                    museng.pauseSound()
-                }
-            }
-            Button{
-                width:parent.width/6
-                text: "Next"
-                padding:20
-            }
-            Button{
-                width:parent.width/6
-                text: "Loop"
-                padding:20
-            }
-            Button{
-                width:parent.width/6
-                text: "Shuffle"
-                padding:20
-            }
-
-          }
-           Row{
-             anchors.top: commands.bottom
              id: commands2
              width:parent.width
 
              ScrollView {
-                 anchors.top: addPlaylist.bottom
+
                  width: parent.width
-                 padding: 0
+                 topPadding: 20
                  height:600
 
                  ListView {
@@ -331,8 +336,69 @@ ApplicationWindow {
         }
     }
 
-    footer: Bar{
-        class_name: "footer energized"
-        title: "Made with ❤️  by Francesco, Arman, and Ryan"
+    footer: Row{
+        id: commands
+
+        width:parent.width
+    Row{
+        id: controls
+
+        width: parent.width
+
+        Button{
+            width:parent.width/6
+            icon.source: "qrc:/src/icons/loop.svg"
+            padding:20
+        }
+       Button{
+           width:parent.width/6
+           icon.source: "qrc:/src/icons/previous.svg"
+           padding:20
+       }
+       Button{
+           width:parent.width/6
+           icon.source: "qrc:/src/icons/stop.svg"
+           padding:20
+           onClicked: {
+              if( museng.isPlaying()){
+                  museng.stopSound();
+                  playButton.isPlaying = !playButton.isPlaying;
+              }
+
+           }
+       }
+       Button{
+           id:playButton
+           property bool isPlaying: false
+           width:parent.width/6
+           icon.source: !isPlaying ? "qrc:/src/icons/play.svg" : "qrc:/src/icons/pause.svg"
+           padding:20
+           onClicked: {
+
+
+                if(!isPlaying && !museng.isPlaying())
+                    museng.playSound();
+                else{
+                    if( museng.isPlaying())
+                        museng.pauseSound();
+                }
+
+               isPlaying = !isPlaying;
+           }
+       }
+       Button{
+           width:parent.width/6
+           icon.source: "qrc:/src/icons/next.svg"
+           padding:20
+       }
+       Button{
+           width:parent.width/6
+           icon.source: "qrc:/src/icons/shuffle.svg"
+           padding:20
+
+       }
     }
+
+
+     }
 }

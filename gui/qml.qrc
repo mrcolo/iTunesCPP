@@ -48,5 +48,12 @@
         <file>src/examples/CardPage.qml</file>
         <file>src/styles/CardStyle.qml</file>
         <file>src/cards/Card.qml</file>
+        <file>src/icons/play.svg</file>
+        <file>src/icons/shuffle.svg</file>
+        <file>src/icons/loop.svg</file>
+        <file>src/icons/pause.svg</file>
+        <file>src/icons/next.svg</file>
+        <file>src/icons/previous.svg</file>
+        <file>src/icons/stop.svg</file>
     </qresource>
 </RCC>
