@@ -22,10 +22,15 @@ ApplicationWindow {
     header: Bar{
         id: titleBar
         leftComponent:Slider {
-            width: 100
+            id:volume
+            width: 200
             from: 1
             value: 100
             to: 100
+            onMoved: {
+                museng.setVolume(volume.value)
+            }
+
         }
         rightComponent: Component{
 

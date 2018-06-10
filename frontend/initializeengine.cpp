@@ -4,11 +4,13 @@
 #include <QFile>
 #include <QJsonObject>
 #include <QJsonDocument>
+#include <QDir>
 
 InitializeEngine::InitializeEngine()
 {
     museng = new musicEngine();
     museng->setWhatToPlay("../../../../example.mp3");
+    qWarning()<<QDir::currentPath();
 }
 
 InitializeEngine::~InitializeEngine()
@@ -20,6 +22,10 @@ InitializeEngine::~InitializeEngine()
 void InitializeEngine::playSound(){
     musicIsPlaying = true;
     museng->play();
+
+}
+void InitializeEngine::setVolume(int volume){
+    museng->setVolume(volume);
 
 }
 
@@ -40,7 +46,7 @@ void InitializeEngine::setCurrent(QString path){
 
     string myPath = path.toStdString();
     //account for anything that is not mp3 or wav or flac
-    museng->setWhatToPlay(myPath.substr(8, myPath.length()-8));
+    museng->setWhatToPlay( "/" + myPath.substr(8, myPath.length()-8));
 }
 
 QJsonObject InitializeEngine::getLibrary(){
@@ -56,7 +62,7 @@ QJsonObject InitializeEngine::getLibrary(){
 
        QJsonDocument d = QJsonDocument::fromJson(val.toUtf8());
 
-       QJsonObject sett2 = d.object();
+       QJsonObject mySongs = d.object();
 
 
 
@@ -69,7 +75,7 @@ QJsonObject InitializeEngine::getLibrary(){
        QJsonArray test = item["imp"].toArray();
        qWarning() << test[1].toString();
        */
-       return sett2;
+       return mySongs;
 }
 
 QJsonObject InitializeEngine::getPlaylist(){
