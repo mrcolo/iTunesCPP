@@ -85,9 +85,10 @@ ApplicationWindow {
                        museng.addSong(myPath)
                        museng.myLibrary = museng.getLibrary();
 
+                       viewSongsList.bella.clear();
+
                        for(var song in museng.myLibrary)
-                           if(myPath.substr(7,myPath.length - 7) === museng.myLibrary[song]["path"] )
-                                viewSongsList.bella.append(museng.myLibrary[song]);
+                           viewSongsList.bella.append(museng.myLibrary[song]);
 
 
                        inputArea.text = "Drag a Song here"
@@ -106,7 +107,7 @@ ApplicationWindow {
        anchors.top: addPlaylist.bottom
        Text{
         id: textCurrentSong
-        text:"We Will Rock You - Queen"
+        text:""
         x: parent.width/2-80
         y: parent.height/2-30
        }
@@ -311,7 +312,7 @@ ApplicationWindow {
                          id: control2
                          width: parent.width + 50
                          height: 40
-                         text: title + " | " + album + " by " + artist
+                         text: "<b>" + title + "</b>" + " by " + "<b>" + artist + "</b>" + " from " + "<i> " +  album + "</i>"
                          font.pixelSize: 15
                          contentItem: Text {
                                  text: control2.text
@@ -335,10 +336,11 @@ ApplicationWindow {
                              if(museng.isPlaying()){
                                 museng.stopSound();
                              }
+
                              if(!playButton.isPlaying && !museng.isPlaying())
                                  playButton.isPlaying = !playButton.isPlaying;
 
-
+                             textCurrentSong.text = "<b>" + title + "</b>" + " by " + "<b>" + artist + "</b>"
                              museng.setCurrent(path);
                              museng.playSound();
 
