@@ -1,11 +1,10 @@
 #ifndef SONG_H
 #define SONG_H
 #include <iostream>
+#include <fstream>
 #include <QImage>
 #include <QString>
 #include <QStringList>
-#include <QJsonArray>
-#include <QJsonDocument>
 #include <QFile>
 #include <QFileDialog>
 #include <QFileInfo>
@@ -23,11 +22,11 @@ class song
 {
 public:
     song(string path_to_mp3);
-    string getTitle();
-    string getArtist();
-    string getAlbum();
-    string getGenre();
-    string getPath();
+    QString getTitle();
+    QString getArtist();
+    QString getAlbum();
+    QString getGenre();
+    QString getPath();
 
 
 private:

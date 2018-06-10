@@ -15,18 +15,18 @@ song::song(string path_to_mp3)
     genre=QString::fromStdString(tag->genre().toCString());
     path=QString::fromStdString(path_to_mp3.c_str());;
 }
-string song::getTitle(){
-    return title.QString::toStdString();
+QString song::getTitle(){
+    return title;
 }
-string song::getArtist(){
-    return artist.QString::toStdString();
+QString song::getArtist(){
+    return artist;
 }
-string song::getAlbum(){
-    return album.QString::toStdString();
+QString song::getAlbum(){
+    return album;
 }
-string song::getGenre(){
-    return genre.QString::toStdString();
+QString song::getGenre(){
+    return genre;
 }
-string song::getPath(){
-    return path.QString::toStdString();
+QString song::getPath(){
+    return path;
 }
