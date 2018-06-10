@@ -9,6 +9,7 @@
 InitializeEngine::InitializeEngine()
 {
     museng = new musicEngine();
+    lib = new library();
     museng->setWhatToPlay("../../../../example.mp3");
     qWarning()<<QDir::currentPath();
 }
@@ -18,7 +19,16 @@ InitializeEngine::~InitializeEngine()
      delete museng;
 
 }
+void InitializeEngine::addSong(QString path){
 
+    string myPath = "/" + path.toStdString().substr(8, myPath.length()-8);
+    std::cout<<myPath<<std::endl;
+
+    //account for anything that is not mp3 or wav or flac
+
+    lib->add_to_library(myPath);
+
+}
 void InitializeEngine::playSound(){
     musicIsPlaying = true;
     museng->play();
@@ -50,8 +60,7 @@ bool InitializeEngine::isPlaying(){
 void InitializeEngine::setCurrent(QString path){
 
     string myPath = path.toStdString();
-    //account for anything that is not mp3 or wav or flac
-    museng->setWhatToPlay( "/" + myPath.substr(8, myPath.length()-8));
+    museng->setWhatToPlay(myPath);
 }
 
 QJsonObject InitializeEngine::getLibrary(){

@@ -79,7 +79,15 @@ ApplicationWindow {
                    }
                    onDropped: {
                        console.log ("onDropped");
-                       museng.setCurrent(drop.urls[0])
+                       museng.addSong(drop.urls[0])
+                       console.log(viewSongs.viewSongsList.library)
+
+
+                       //viewSongsList.model = museng.
+
+                       for(var song in museng.myLibrary)
+                           viewSongsList.library.append(museng.myLibrary[song]);
+
                        inputArea.text = "Drag a Song here"
                        popup.close();
                    }
@@ -279,21 +287,28 @@ ApplicationWindow {
 
              ScrollView {
 
+                 id: viewSongs
                  width: parent.width
                  topPadding: 20
                  height:600
 
                  ListView {
+                     id: viewSongsList
+                     property ListModel library
+                      model: ListModel{
+                        id:library
+                       }
                      Component.onCompleted: {
-                         for(var song in museng.myLibrary.library)
-                             library.append(museng.myLibrary.library[song]);
+                         for(var song in museng.myLibrary)
+                             library.append(museng.myLibrary[song]);
                      }
-                     model: ListModel { id: library}
+
+
                      delegate: Button {
                          id: control2
                          width: parent.width + 50
                          height: 40
-                         text: title
+                         text: title + " | " + album + " by " + artist
                          font.pixelSize: 15
                          contentItem: Text {
                                  text: control2.text
@@ -314,7 +329,17 @@ ApplicationWindow {
                                          radius: 1
                                      }
                          onClicked: {
-                             console.log(artist)
+                             if(museng.isPlaying()){
+                                museng.stopSound();
+                             }
+                             if(!playButton.isPlaying && !museng.isPlaying())
+                                 playButton.isPlaying = !playButton.isPlaying;
+
+
+                             museng.setCurrent(path);
+                             museng.playSound();
+
+
                          }
                      }
 
@@ -360,9 +385,13 @@ ApplicationWindow {
            icon.source: "qrc:/src/icons/stop.svg"
            padding:20
            onClicked: {
-              if( museng.isPlaying()){
+              if(museng.isPlaying()){
                   museng.stopSound();
-                  playButton.isPlaying = !playButton.isPlaying;
+
+                  if(playButton.isPlaying)
+                      playButton.isPlaying = !playButton.isPlaying
+
+
               }
 
            }

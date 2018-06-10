@@ -1,16 +1,23 @@
 {
-  "library": {
-    "123" : {
-      "title": "We Will Rock You",
-      "artist": "Queen"
+    "1": {
+        "album": "The Peace and the Panic",
+        "artist": "Neck Deep",
+        "genre": "Pop Punk",
+        "path": "/Users/francescocolonnese/Desktop/WilkinsonTest3/example.mp3",
+        "title": "Heavy Lies"
     },
-    "456": {
-      "title": "fuck",
-      "artist": "thisbitch"
+    "2": {
+        "album": "The Peace and the Panic",
+        "artist": "Neck Deep",
+        "genre": "Pop Punk",
+        "path": "/Users/francescocolonnese/Music/myMusic/01. Motion Sickness.mp3",
+        "title": "Motion Sickness"
     },
-    "678": {
-      "title": "you",
-      "artist": "fuckyoutoo"
+    "3": {
+        "album": "The Peace and the Panic",
+        "artist": "Neck Deep",
+        "genre": "Pop Punk",
+        "path": "/Users/francescocolonnese/Music/myMusic/08. Wish You Were Here.mp3",
+        "title": "Wish You Were Here"
     }
-  }
 }

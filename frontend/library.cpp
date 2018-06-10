@@ -13,6 +13,9 @@ library::library()
     }
     setLibCounter();
 }
+library::~library(){
+    saveJson("../../../../backend/library.json");
+}
 
 void library::create_playlist()
 {
@@ -22,15 +25,19 @@ void library::create_playlist()
 void library::add_to_library(string filepath)
 {
     song addedSong(filepath);
+
+
     QJsonObject songObject;
-    songObject.insert("Title", addedSong.getTitle());
-    songObject.insert("Artist", addedSong.getArtist());
-    songObject.insert("Album", addedSong.getAlbum());
-    songObject.insert("Genre", addedSong.getGenre());
-    songObject.insert("Path", addedSong.getPath());
+    songObject.insert("title", addedSong.getTitle());
+    songObject.insert("artist", addedSong.getArtist());
+    songObject.insert("album", addedSong.getAlbum());
+    songObject.insert("genre", addedSong.getGenre());
+    songObject.insert("path", addedSong.getPath());
+    qWarning()<<songObject;
 
     libraryObject.insert(QString::number(libCounter), songObject);
     libCounter++;
+    saveJson("../../../../backend/library.json");
 }
 
 void library::saveJson(QString fileName)

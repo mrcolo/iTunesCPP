@@ -4,6 +4,7 @@
 #include "../backend/soundengine/musicengine.h"
 #include <QString>
 #include <QJsonObject>
+#include "../frontend/library.h"
 
 class InitializeEngine :
         public QObject
@@ -13,7 +14,9 @@ public:
      InitializeEngine();
     ~InitializeEngine();
     musicEngine* museng;
+    library* lib;
     bool musicIsPlaying = false;
+    Q_INVOKABLE void addSong(QString path);
     Q_INVOKABLE void stopSound();
     Q_INVOKABLE void setVolume(int volume);
     Q_INVOKABLE void playSound();
