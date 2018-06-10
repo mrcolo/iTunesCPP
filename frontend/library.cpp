@@ -33,7 +33,7 @@ void library::add_to_library(string filepath)
     songObject.insert("album", addedSong.getAlbum());
     songObject.insert("genre", addedSong.getGenre());
     songObject.insert("path", addedSong.getPath());
-    qWarning()<<songObject;
+
 
     libraryObject.insert(QString::number(libCounter), songObject);
     libCounter++;
@@ -43,7 +43,6 @@ void library::add_to_library(string filepath)
 void library::saveJson(QString fileName)
 {
     QJsonDocument doc(libraryObject);
-    qDebug() << doc.toJson();
 
     QFile jsonFile(fileName);
     jsonFile.open(QFile::WriteOnly);

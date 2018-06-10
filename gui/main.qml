@@ -71,6 +71,7 @@ ApplicationWindow {
                height: parent.height;
 
                DropArea {
+                   property ListModel mycurrentModel
                    id: dropArea;
                    anchors.fill: parent;
                    onEntered: {
@@ -79,14 +80,15 @@ ApplicationWindow {
                    }
                    onDropped: {
                        console.log ("onDropped");
-                       museng.addSong(drop.urls[0])
-                       console.log(viewSongs.viewSongsList.library)
+                       var myPath = drop.urls[0]
 
-
-                       //viewSongsList.model = museng.
+                       museng.addSong(myPath)
+                       museng.myLibrary = museng.getLibrary();
 
                        for(var song in museng.myLibrary)
-                           viewSongsList.library.append(museng.myLibrary[song]);
+                           if(myPath.substr(7,myPath.length - 7) === museng.myLibrary[song]["path"] )
+                                viewSongsList.bella.append(museng.myLibrary[song]);
+
 
                        inputArea.text = "Drag a Song here"
                        popup.close();
@@ -294,11 +296,12 @@ ApplicationWindow {
 
                  ListView {
                      id: viewSongsList
-                     property ListModel library
+                     property ListModel bella : library
                       model: ListModel{
                         id:library
                        }
                      Component.onCompleted: {
+
                          for(var song in museng.myLibrary)
                              library.append(museng.myLibrary[song]);
                      }
@@ -403,8 +406,6 @@ ApplicationWindow {
            icon.source: !isPlaying ? "qrc:/src/icons/play.svg" : "qrc:/src/icons/pause.svg"
            padding:20
            onClicked: {
-
-
                 if(!isPlaying && !museng.isPlaying())
                     museng.playSound();
                 else{
