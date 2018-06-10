@@ -58,6 +58,7 @@ ApplicationWindow {
             y:parent.height/2 - 10
             text:"Drag a Song here "
            }
+
            Rectangle {
                id: background;
                color: "transparent";
@@ -80,6 +81,47 @@ ApplicationWindow {
                }
            }
        }
+    Rectangle{
+
+        width: parent.width
+        height:addPlaylist.height*2
+        id: bella
+       color: "#E0E0E0"
+
+       anchors.top: addPlaylist.bottom
+       Text{
+        id: textCurrentSong
+        text:"We Will Rock You - Queen"
+        x: parent.width/2-80
+        y: parent.height/2-30
+       }
+       Text{
+        property int myCurrentTime : 23
+        id: remainingSong
+        text: "0:" + myCurrentTime
+        anchors.right: pointLength.left
+        y: pointLength.y +10
+
+       }
+
+       Slider {
+            id: pointLength
+           anchors.top: textCurrentSong.bottom
+           x: textCurrentSong.x - 170
+           width: 500
+           from: 1
+           value: remainingSong.myCurrentTime
+           to: 100
+       }
+       Text{
+        property string myTotalTime : "4:23"
+        id: totalSong
+        text: myTotalTime
+        anchors.left: pointLength.right
+        y: pointLength.y +10
+       }
+
+    }
     ButtonDefault{
         class_name: "energized"
         width: parent.width
@@ -91,11 +133,11 @@ ApplicationWindow {
         spacing: 0
         width: parent.width
         height: parent.height
-        anchors.top: addPlaylist.bottom
-
+        anchors.top: bella.bottom
         ScrollView {
             id: viewPlaylist
-            topPadding: 30
+
+            topPadding:20
             width: parent.width/4
             height: parent.height
 
@@ -226,14 +268,14 @@ ApplicationWindow {
             height: parent.height/1.1
 
            Row{
-             anchors.top: commands.bottom
+
              id: commands2
              width:parent.width
 
              ScrollView {
-                 anchors.top: addPlaylist.bottom
+
                  width: parent.width
-                 padding: 0
+                 topPadding: 20
                  height:600
 
                  ListView {
@@ -291,7 +333,13 @@ ApplicationWindow {
 
     footer: Row{
         id: commands
+
         width:parent.width
+    Row{
+        id: controls
+
+        width: parent.width
+
         Button{
             width:parent.width/5
             icon.source: "qrc:/src/icons/loop.svg"
@@ -309,14 +357,13 @@ ApplicationWindow {
            icon.source: !isPlaying ? "qrc:/src/icons/play.svg" : "qrc:/src/icons/pause.svg"
            padding:20
            onClicked: {
-                console.log(isPlaying,museng.isPlaying())
+
 
                 if(!isPlaying && !museng.isPlaying())
                     museng.playSound();
                 else{
                     if( museng.isPlaying())
                         museng.pauseSound();
-
                 }
 
                isPlaying = !isPlaying;
@@ -333,6 +380,7 @@ ApplicationWindow {
            padding:20
 
        }
+    }
 
 
      }
