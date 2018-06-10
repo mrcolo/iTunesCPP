@@ -346,19 +346,31 @@ ApplicationWindow {
         width: parent.width
 
         Button{
-            width:parent.width/5
+            width:parent.width/6
             icon.source: "qrc:/src/icons/loop.svg"
             padding:20
         }
        Button{
-           width:parent.width/5
+           width:parent.width/6
            icon.source: "qrc:/src/icons/previous.svg"
            padding:20
        }
        Button{
+           width:parent.width/6
+           icon.source: "qrc:/src/icons/stop.svg"
+           padding:20
+           onClicked: {
+              if( museng.isPlaying()){
+                  museng.stopSound();
+                  playButton.isPlaying = !playButton.isPlaying;
+              }
+
+           }
+       }
+       Button{
            id:playButton
            property bool isPlaying: false
-           width:parent.width/5
+           width:parent.width/6
            icon.source: !isPlaying ? "qrc:/src/icons/play.svg" : "qrc:/src/icons/pause.svg"
            padding:20
            onClicked: {
@@ -375,12 +387,12 @@ ApplicationWindow {
            }
        }
        Button{
-           width:parent.width/5
+           width:parent.width/6
            icon.source: "qrc:/src/icons/next.svg"
            padding:20
        }
        Button{
-           width:parent.width/5
+           width:parent.width/6
            icon.source: "qrc:/src/icons/shuffle.svg"
            padding:20
 

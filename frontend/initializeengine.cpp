@@ -33,6 +33,11 @@ void InitializeEngine::pauseSound(){
     museng->pause();
 }
 
+void InitializeEngine::stopSound(){
+    musicIsPlaying = false;
+    museng->stop();
+}
+
 
 
 bool InitializeEngine::isPlaying(){

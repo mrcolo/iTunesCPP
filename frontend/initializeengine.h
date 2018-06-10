@@ -14,6 +14,7 @@ public:
     ~InitializeEngine();
     musicEngine* museng;
     bool musicIsPlaying = false;
+    Q_INVOKABLE void stopSound();
     Q_INVOKABLE void setVolume(int volume);
     Q_INVOKABLE void playSound();
     Q_INVOKABLE bool isPlaying();

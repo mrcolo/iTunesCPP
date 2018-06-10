@@ -54,5 +54,6 @@
         <file>src/icons/pause.svg</file>
         <file>src/icons/next.svg</file>
         <file>src/icons/previous.svg</file>
+        <file>src/icons/stop.svg</file>
     </qresource>
 </RCC>
