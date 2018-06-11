@@ -1,0 +1,50 @@
+[
+    {
+        "album": "The Peace and the Panic",
+        "artist": "Neck Deep",
+        "genre": "Pop Punk",
+        "index": 0,
+        "path": "/Users/francescocolonnese/Desktop/WilkinsonTest3/example.mp3",
+        "title": "Heavy Lies"
+    },
+    {
+        "album": "Undefined",
+        "artist": "Undefined",
+        "genre": "Undefined",
+        "index": 1,
+        "path": "/Users/francescocolonnese/Desktop/WilkinsonTest3/example.wav",
+        "title": "example"
+    },
+    {
+        "album": "The Peace and the Panic",
+        "artist": "Neck Deep",
+        "genre": "Pop Punk",
+        "index": 2,
+        "path": "/Users/francescocolonnese/Music/myMusic/11. Where Do We Go When We Go.mp3",
+        "title": "Where Do We Go When We Go"
+    },
+    {
+        "album": "The Peace and the Panic",
+        "artist": "Neck Deep",
+        "genre": "Pop Punk",
+        "index": 3,
+        "path": "/Users/francescocolonnese/Music/myMusic/10. 19 Seventy Sumthin'.mp3",
+        "title": "19 Seventy Sumthin'"
+    },
+    {
+        "album": "The Peace and the Panic",
+        "artist": "Neck Deep",
+        "genre": "Pop Punk",
+        "index": 4,
+        "path": "/Users/francescocolonnese/Music/myMusic/06. Don't Wait (feat. Sam Carter).mp3",
+        "title": "Don't Wait (feat. Sam Carter)"
+    },
+    {
+        "album": "The Peace and the Panic",
+        "artist": "Neck Deep",
+        "genre": "Pop Punk",
+        "index": 5,
+        "path": "/Users/francescocolonnese/Music/myMusic/12. Beautiful Madness.mp3",
+        "title": "Beautiful Madness"
+    }
+]

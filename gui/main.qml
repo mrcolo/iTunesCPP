@@ -9,10 +9,17 @@ import io.qt.examples.initializeengine 1.0
 
 
 ApplicationWindow {
+
     Component.onCompleted: {
         museng.myLibrary = museng.getLibrary();
         museng.setCurrent(museng.myLibrary[currentIndex].path)
         textCurrentSong.text = "<b>" + museng.myLibrary[currentIndex].title + "</b>" + " by " + "<b>" + museng.myLibrary[currentIndex].artist + "</b>"
+    }
+    Item{
+        focus: true
+        Keys.onTabPressed: {
+            myApp.isReduced = !myApp.isReduced;
+        }
     }
     function checkFinished() {
            if(museng.isFinished() && loop.loopIt && playButton.isPlaying)
@@ -47,15 +54,17 @@ ApplicationWindow {
                 }
            }
 
+
            counterplaylist.text = "You Selected " + playlistPopup.myVector.length + " Elements"
         }
 
 
     id: myApp
     property int currentIndex : 0
+    property bool isReduced : false
     visible: true
-    width: 800
-    height: 1280
+    width: !isReduced ? 800 : 600
+    height: !isReduced ? 1280 : 110
 
     Timer {
         interval: 500
@@ -141,7 +150,7 @@ ApplicationWindow {
                        for(var song in museng.myLibrary)
                            viewSongsList.bella.append(museng.myLibrary[song]);
 
-
+                        console.log(viewSongsList.bella)
                        inputArea.text = "Drag a Song here"
                        popup.close();
                    }
@@ -232,11 +241,13 @@ ApplicationWindow {
                height:600
 
                ListView {
-                   id: viewSongsList
+                   id: viewSongsListPlaylist
                    property ListModel bella : library
-                    model: ListModel{
+
+                   model: ListModel{
                       id:library
                      }
+
                    Component.onCompleted: {
                        for(var song in museng.myLibrary)
                            library.append(museng.myLibrary[song]);
@@ -372,13 +383,13 @@ ApplicationWindow {
 
              ScrollView {
 
-                 id: viewSongsPlaylist
+                 id: viewSongs
                  width: parent.width
                  topPadding: 20
                  height:600
 
                  ListView {
-                     id: viewSongsPlaylistview
+                     id: viewSongsList
                      property ListModel bella : playlistlibrary
                       model: ListModel{
                         id:playlistlibrary
