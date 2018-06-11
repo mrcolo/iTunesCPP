@@ -30,7 +30,8 @@ private:
 
     int plistCounter = 1;
     QString plist_path;
-    QJsonObject plistObject;
+//    QJsonObject plistObject;
+    QJsonArray plistArray;
 
 };
 
