@@ -20,7 +20,7 @@ public:
 
 private:
     int libCounter = 1;
-    QJsonObject libraryObject;
+    QJsonArray libraryArray;
 };
 
 #endif // LIBRARY_H

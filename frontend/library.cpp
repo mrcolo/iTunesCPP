@@ -29,6 +29,7 @@ void library::add_to_library(string filepath)
 
 
     QJsonObject songObject;
+    songObject.insert("index", libCounter);
     songObject.insert("title", addedSong.getTitle());
     songObject.insert("artist", addedSong.getArtist());
     songObject.insert("album", addedSong.getAlbum());
@@ -36,7 +37,7 @@ void library::add_to_library(string filepath)
     songObject.insert("path", addedSong.getPath());
 
 
-    libraryObject.insert(QString::number(libCounter), songObject);
+    libraryArray.append(songObject);
     libCounter++;
 
     saveJson("../../../../backend/library.json");
@@ -44,7 +45,7 @@ void library::add_to_library(string filepath)
 
 void library::saveJson(QString fileName)
 {
-    QJsonDocument doc(libraryObject);
+    QJsonDocument doc(libraryArray);
 
     QFile jsonFile(fileName);
     jsonFile.open(QFile::WriteOnly);
@@ -62,8 +63,8 @@ void library::readLibJson(QString fileName)
 
     QJsonDocument libDocument = QJsonDocument::fromJson(libString.toUtf8());
     qWarning() << libDocument.isNull(); // <- print false
-    libraryObject = libDocument.object();
-    qWarning() << libraryObject.value(QString("title"));  // <- print my title
+    libraryArray = libDocument.array();
+    qWarning() << libraryArray[0];  // <- print my title
 }
 
 inline bool library::libJsonExists (string fileName) {
@@ -73,7 +74,7 @@ inline bool library::libJsonExists (string fileName) {
 }
 
 void library::setLibCounter() {
-    for(auto song : libraryObject) {
+    for(auto song : libraryArray) {
         libCounter++;
     }
 }
