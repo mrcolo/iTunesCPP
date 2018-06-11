@@ -134,7 +134,7 @@ string musicEngine::getCurrentTime(){
     if(music){
         int seconds = (int) (music->getPlayPosition() / 1000) % 60 ;
         int minutes = (int) ((music->getPlayPosition() / (1000*60)) % 60);
-        int hours   = (int) ((music->getPlayPosition() / (1000*60*60)));
+        //int hours   = (int) ((music->getPlayPosition() / (1000*60*60)));
 
         if(seconds < 10)
             return (to_string(minutes) + ":0" + to_string(seconds));

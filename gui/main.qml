@@ -37,7 +37,6 @@ ApplicationWindow {
 
            museng.currenTime = museng.currentime()
            museng.totalTime = museng.totaltime()
-           //pointLength.value = (parseInt(museng.currentime)*100/parseInt(museng.totaltime));
 
            if(museng.isFinished() && playButton.isPlaying){
                 if(currentIndex + 1 <= museng.myLibrary.length){
@@ -47,6 +46,8 @@ ApplicationWindow {
                     museng.playSound();
                 }
            }
+
+           counterplaylist.text = "You Selected " + playlistPopup.myVector.length + " Elements"
         }
 
 
@@ -191,11 +192,117 @@ ApplicationWindow {
        }
 
     }
+    Popup {
+           property var myVector : []
+
+           id: playlistPopup
+           x: parent.width/2 - 250
+           y: -50
+           width: 500
+           height: 900
+           modal: true
+           focus: true
+           closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
+           Text{
+            id:titleAdd
+            font.pointSize: 60
+            x:parent.width/2 - 180
+            text:"Select Songs "
+           }
+           Text{
+            id:playlistName
+            anchors.top : titleAdd.bottom
+            text:"Title "
+            font.pointSize: 40
+           }
+
+           TextInput{
+               id: inputName
+            anchors.top : playlistName.bottom
+            color: "grey"
+            text: "Insert name"
+            font.pointSize: 20
+
+           }
+           ScrollView {
+               anchors.top:inputName.bottom
+               id: myPlaylistSongs
+               width: 400
+               topPadding: 20
+               height:600
+
+               ListView {
+                   id: viewSongsList
+                   property ListModel bella : library
+                    model: ListModel{
+                      id:library
+                     }
+                   Component.onCompleted: {
+                       for(var song in museng.myLibrary)
+                           library.append(museng.myLibrary[song]);
+                   }
+
+                   delegate: Button {
+                       id: control3
+                       width: parent.width + 50
+                       height: 40
+                       text: "<b>" + title + "</b>" + " by " + "<b>" + artist + "</b>" + " from " + "<i> " +  album + "</i>"
+                       font.pixelSize: 15
+                       contentItem: Text {
+                               text: control3.text
+                               font: control3.font
+                               opacity: enabled ? 1.0 : 0.3
+                               color: control3.down ? "#75bcff" : "#1386f2"
+                               horizontalAlignment: Text.AlignLeft
+                               verticalAlignment: Text.AlignVCenter
+                               elide: Text.ElideRight
+                           }
+
+                       background: Rectangle {
+                                       implicitWidth: parent.width
+                                       implicitHeight: 5
+                                       opacity: enabled ? 1 : 0.3
+                                       border.color: control3.down ? "dbd9d9" : "#f2f2f2"
+                                       border.width: 0.5
+                                       radius: 1
+                                   }
+                       onClicked: {
+                           playlistPopup.myVector.push(index)
+
+                       }
+                   }
+
+               }
+           }
+           Text{
+            id:counterplaylist
+            anchors.top : myPlaylistSongs.bottom
+            font.pointSize: 20
+            text:"You selected " + playlistPopup.myVector.length + " Elements"
+           }
+           ButtonDefault{
+               anchors.top: counterplaylist.bottom
+               class_name: "energized"
+               width: parent.width
+               id: addThisPlaylist
+               text: "Add Playlist"
+               onClicked: {
+                   console.log(playlistPopup.myVector)
+                   //museng.addPlaylist(inputName.text, playlistPopup.myVector)
+                   playlistPopup.close()
+               }
+           }
+       }
     ButtonDefault{
         class_name: "energized"
         width: parent.width
         id: addPlaylist
         text: "Add Playlist"
+        onClicked: {
+            playlistPopup.myVector = [];
+            playlistPopup.open();
+
+        }
     }
     Grid {
         columns: 2
@@ -218,8 +325,8 @@ ApplicationWindow {
                   }
                 Component.onCompleted: {
 
-                    for(var song in museng.myPlaylists)
-                        playlists.append(museng.myPlaylists[song]);
+                    for(var playlist in museng.myPlaylists)
+                        playlists.append(museng.myPlaylists[playlist]);
                 }
                 delegate: Button {
                     id: control
@@ -265,21 +372,21 @@ ApplicationWindow {
 
              ScrollView {
 
-                 id: viewSongs
+                 id: viewSongsPlaylist
                  width: parent.width
                  topPadding: 20
                  height:600
 
                  ListView {
-                     id: viewSongsList
-                     property ListModel bella : library
+                     id: viewSongsPlaylistview
+                     property ListModel bella : playlistlibrary
                       model: ListModel{
-                        id:library
+                        id:playlistlibrary
                        }
                      Component.onCompleted: {
 
                          for(var song in museng.myLibrary)
-                             library.append(museng.myLibrary[song]);
+                             playlistlibrary.append(museng.myLibrary[song]);
                      }
 
 
@@ -377,15 +484,35 @@ ApplicationWindow {
            icon.source: "qrc:/src/icons/previous.svg"
            padding:20
            onClicked : {
-               console.log(currentIndex)
-               if(currentIndex - 1 >= 0){
+               if(shuffle.shuffleIt){
+                   var newIndex = Math.random() * (museng.myLibrary.length);
 
-                   museng.stopSound();
-                   myApp.currentIndex--;
-                   museng.setCurrent(museng.myLibrary[currentIndex].path)
-                   textCurrentSong.text = "<b>" + museng.myLibrary[currentIndex].title + "</b>" + " by " + "<b>" + museng.myLibrary[currentIndex].artist + "</b>"
-                   museng.playSound();
+                   if(newIndex <= museng.myLibrary.length && newIndex != currentIndex){
+                       currentIndex = newIndex
+                       museng.setCurrent(museng.myLibrary[currentIndex].path)
+                       textCurrentSong.text = "<b>" + museng.myLibrary[currentIndex].title + "</b>" + " by " + "<b>" + museng.myLibrary[currentIndex].artist + "</b>"
+                       museng.playSound();
+                   }
                }
+               else
+                   if(currentIndex - 1 >= 0){
+                       if(museng.isPlaying())
+                            museng.stopSound();
+                       myApp.currentIndex--;
+                       museng.setCurrent(museng.myLibrary[currentIndex].path)
+                       textCurrentSong.text = "<b>" + museng.myLibrary[currentIndex].title + "</b>" + " by " + "<b>" + museng.myLibrary[currentIndex].artist + "</b>"
+                       museng.playSound();
+                   }
+                   else{
+                       museng.stopSound();
+                       myApp.currentIndex = 0;
+                       museng.setCurrent(museng.myLibrary[currentIndex].path)
+                       textCurrentSong.text = "<b>" + museng.myLibrary[currentIndex].title + "</b>" + " by " + "<b>" + museng.myLibrary[currentIndex].artist + "</b>"
+                       museng.playSound();
+
+                   }
+               if(!playButton.isPlaying)
+                   playButton.isPlaying = true
 
 
 
@@ -404,6 +531,8 @@ ApplicationWindow {
                        museng.stopSound()
 
                myApp.currentIndex = 0
+               museng.setCurrent(museng.myLibrary[currentIndex].path)
+               textCurrentSong.text = "<b>" + museng.myLibrary[currentIndex].title + "</b>" + " by " + "<b>" + museng.myLibrary[currentIndex].artist + "</b>"
 
                playButton.isPlaying = false
 
@@ -432,14 +561,36 @@ ApplicationWindow {
            icon.source: "qrc:/src/icons/next.svg"
            padding:20
            onClicked:{
-               console.log(currentIndex)
-               if(currentIndex + 1 <= museng.myLibrary.length){
-                   museng.stopSound();
-                   myApp.currentIndex++;
-                   museng.setCurrent(museng.myLibrary[currentIndex].path)
-                   textCurrentSong.text = "<b>" + museng.myLibrary[currentIndex].title + "</b>" + " by " + "<b>" + museng.myLibrary[currentIndex].artist + "</b>"
-                   museng.playSound();
+               if(shuffle.shuffleIt){
+                   var newIndex = Math.random() * (museng.myLibrary.length);
+
+                   if(newIndex <= museng.myLibrary.length && newIndex != currentIndex){
+                       currentIndex = newIndex
+                       museng.setCurrent(museng.myLibrary[currentIndex].path)
+                       textCurrentSong.text = "<b>" + museng.myLibrary[currentIndex].title + "</b>" + " by " + "<b>" + museng.myLibrary[currentIndex].artist + "</b>"
+                       museng.playSound();
+                   }
                }
+               else
+                   if(currentIndex + 1 <= museng.myLibrary.length){
+                       if(museng.isPlaying())
+                            museng.stopSound();
+                       myApp.currentIndex++;
+                       museng.setCurrent(museng.myLibrary[currentIndex].path)
+                       textCurrentSong.text = "<b>" + museng.myLibrary[currentIndex].title + "</b>" + " by " + "<b>" + museng.myLibrary[currentIndex].artist + "</b>"
+                       museng.playSound();
+                   }
+                   else{
+                       museng.stopSound();
+                       myApp.currentIndex = 0;
+                       museng.setCurrent(museng.myLibrary[currentIndex].path)
+                       textCurrentSong.text = "<b>" + museng.myLibrary[currentIndex].title + "</b>" + " by " + "<b>" + museng.myLibrary[currentIndex].artist + "</b>"
+                       museng.playSound();
+
+                   }
+
+               if(!playButton.isPlaying)
+                   playButton.isPlaying = true
 
            }
        }

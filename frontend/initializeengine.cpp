@@ -115,8 +115,8 @@ QJsonObject InitializeEngine::getMyPlaylists(){
         return myPlaylists;
 }
 
-void InitializeEngine::addPlaylist(QString name, vector<string> mySongs){
-    //create object playlist with vector mySongs and name, name
+void InitializeEngine::addPlaylist(QString name, QVector<int> mySongs){
+    //lib->create_playlist(name, mySongs)
 }
 
 bool InitializeEngine::isFinished(){
