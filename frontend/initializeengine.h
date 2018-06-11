@@ -24,7 +24,8 @@ public:
     Q_INVOKABLE void pauseSound();
     Q_INVOKABLE void setCurrent(QString path);
     Q_INVOKABLE QJsonObject getLibrary();
-    Q_INVOKABLE QJsonObject getPlaylist();
+    Q_INVOKABLE QJsonObject getPlaylist(string playlist_name);
+    Q_INVOKABLE void create_playlist(string plist_name);
 };
 
 #endif // INITIALIZEENGINE_H
