@@ -18,9 +18,9 @@ library::~library(){
     saveJson("../../../../backend/library.json");
 }
 
-void library::create_playlist(string plistName, vector<int> pathVector)
+void library::create_playlist(QString plistName, QVector<int> pathVector)
 {
-    playlist newPlaylist(plistName);
+    playlist newPlaylist(plistName.toStdString());
     for(int i : pathVector) {
         newPlaylist.add_to_playlist(libraryArray[i].toObject().value("path").toString().toStdString());
     }
