@@ -10,13 +10,15 @@ import io.qt.examples.initializeengine 1.0
 
 ApplicationWindow {
     function checkFinished() {
-           if(museng.isFinished() && !loop.loopIt)
+
+            if(museng.isFinished() && !loop.loopIt)
                 playButton.isPlaying = false;
 
            if(museng.isFinished() && loop.loopIt && playButton.isPlaying)
                museng.playSound();
            else
                console.log("not finished")
+
         }
 
     id: myApp
@@ -337,10 +339,14 @@ ApplicationWindow {
            padding:20
            onClicked: {
               console.log(museng.isPlaying())
-              if(museng.isPlaying && playButton.isPlaying){
+               if(museng.isPlaying())
                   museng.stopSound();
-                  playButton.isPlaying = false
-              }
+               else
+                   if(!museng.isFinished())
+                       museng.stopSound()
+
+               playButton.isPlaying = false
+
            }
        }
        Button{
@@ -350,11 +356,13 @@ ApplicationWindow {
            icon.source: !isPlaying ? "qrc:/src/icons/play.svg" : "qrc:/src/icons/pause.svg"
            padding:20
            onClicked: {
-                if(!museng.isPlaying())
-                    museng.playSound();
-                else{
-                    museng.pauseSound();
-                }
+              if(museng.isPlaying())
+                museng.pauseSound();
+              else
+                if(museng.isFinished())
+                    museng.playSound()
+                else
+                    museng.pauseSound()
 
                isPlaying = !isPlaying;
            }
