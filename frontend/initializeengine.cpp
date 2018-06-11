@@ -20,8 +20,9 @@ InitializeEngine::~InitializeEngine()
 
 }
 void InitializeEngine::addSong(QString path){
+    qWarning()<<path;
+    string myPath = "/" + path.toStdString().substr(8, path.length()-8);
 
-    string myPath = "/" + path.toStdString().substr(8, myPath.length()-8);
     std::cout<<myPath<<std::endl;
 
     //account for anything that is not mp3 or wav or flac
@@ -40,6 +41,7 @@ void InitializeEngine::setVolume(int volume){
 }
 
 void InitializeEngine::pauseSound(){
+    musicIsPlaying = false;
     museng->pause();
 }
 
@@ -47,8 +49,6 @@ void InitializeEngine::stopSound(){
     musicIsPlaying = false;
     museng->stop();
 }
-
-
 
 bool InitializeEngine::isPlaying(){
     if(musicIsPlaying)
@@ -78,21 +78,57 @@ QJsonObject InitializeEngine::getLibrary(){
 
        QJsonObject mySongs = d.object();
 
-
-
-        /*
-       qWarning() << tr("QJsonObject[appName] of description: ") << item["description"];
-       QJsonValue subobj = item["description"];
-       qWarning() << subobj.toString();
-
-       qWarning() << tr("QJsonObject[appName] of value: ") << item["imp"];
-       QJsonArray test = item["imp"].toArray();
-       qWarning() << test[1].toString();
-       */
        return mySongs;
 }
 
-QJsonObject InitializeEngine::getPlaylist(){
+QJsonObject InitializeEngine::getPlaylist(QString name){
+          //qWarning()<<name;
+//        QString val;
+//        QFile file;
+
+//        file.setFileName("../../../../backend/playlists/"+ name + ".json");
+//        file.open(QIODevice::ReadOnly | QIODevice::Text);
+
+//        val = file.readAll();
+//        file.close();
+
+//        QJsonDocument d = QJsonDocument::fromJson(val.toUtf8());
+
+//        QJsonObject mySongs = d.object();
+
+//        return mySongs;
+}
+
+QJsonObject InitializeEngine::getMyPlaylists(){
+
+        QString val;
+        QFile file;
+
+        file.setFileName("../../../../backend/playlists/myPlaylists.json");
+        file.open(QIODevice::ReadOnly | QIODevice::Text);
+
+        val = file.readAll();
+
+        file.close();
+        qWarning()<<val;
+        QJsonDocument d = QJsonDocument::fromJson(val.toUtf8());
+
+        QJsonObject myPlaylists = d.object();
+
+        return myPlaylists;
+}
+
+void InitializeEngine::addPlaylist(QString name, vector<string> mySongs){
+    //create object playlist with vector mySongs and name, name
 
 }
+
+bool InitializeEngine::isFinished(){
+    return museng->isFinished();
+}
+
+void InitializeEngine::loop(){
+    museng->loop();
+}
+
 

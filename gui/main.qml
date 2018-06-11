@@ -7,12 +7,29 @@ import "src/buttons"
 import "src/variables/fontawesome.js" as FontAwesome
 import io.qt.examples.initializeengine 1.0
 
+
 ApplicationWindow {
+    function checkFinished() {
+           if(museng.isFinished() && !loop.loopIt)
+                playButton.isPlaying = false;
+
+           if(museng.isFinished() && loop.loopIt && playButton.isPlaying)
+               museng.playSound();
+           else
+               console.log("not finished")
+        }
+
     id: myApp
     visible: true
     width: 800
     height: 1280
 
+    Timer {
+        interval: 100
+        running: true
+        repeat: true
+        onTriggered: checkFinished()
+    }
     FontLoader{ source: "qrc:/src/fonts/fontawesome-webfont.ttf"}
 
     Rectangle {
@@ -79,10 +96,11 @@ ApplicationWindow {
                        inputArea.text = "Now Drop it!"
                    }
                    onDropped: {
-                       console.log ("onDropped");
-                       var myPath = drop.urls[0]
 
+                       var myPath = drop.urls[0]
+                        console.log("works")
                        museng.addSong(myPath)
+
                        museng.myLibrary = museng.getLibrary();
 
                        viewSongsList.bella.clear();
@@ -158,99 +176,21 @@ ApplicationWindow {
             height: parent.height
 
             ListView {
-                model: ListModel {
-                    ListElement {
-                        text: "John Brown"
-                        number: "My Library"
-                    }
-                    ListElement {
-                        text: "Sam Wise"
-                        number: "Alternative Tunes"
-                    }
-                    ListElement {
-                        text: "Bill Smith"
-                        number: "Chill Vibes"
-                    }
-                    ListElement {
-                        text: "John Brown"
-                        number: "555 8426"
-                    }
-                    ListElement {
-                        text: "Sam Wise"
-                        number: "555 0473"
-                    }
-                    ListElement {
-                        text: "Bill Smith"
-                        number: "555 3264"
-                    }
-                    ListElement {
-                        text: "John Brown"
-                        number: "555 8426"
-                    }
-                    ListElement {
-                        text: "Sam Wise"
-                        number: "555 0473"
-                    }
-                    ListElement {
-                        text: "Bill Smith"
-                        number: "555 3264"
-                    }
-                    ListElement {
-                        text: "John Brown"
-                        number: "555 8426"
-                    }
-                    ListElement {
-                        text: "Sam Wise"
-                        number: "555 0473"
-                    }
-                    ListElement {
-                        text: "Bill Smith"
-                        number: "555 3264"
-                    }
-                    ListElement {
-                        text: "John Brown"
-                        number: "555 8426"
-                    }
-                    ListElement {
-                        text: "Sam Wise"
-                        number: "555 0473"
-                    }
-                    ListElement {
-                        text: "Bill Smith"
-                        number: "555 3264"
-                    }
-                    ListElement {
-                        text: "John Brown"
-                        number: "555 8426"
-                    }
-                    ListElement {
-                        text: "Sam Wise"
-                        number: "555 0473"
-                    }
-                    ListElement {
-                        text: "Bill Smith"
-                        number: "555 3264"
-                    }
-                    ListElement {
-                        text: "John Brown"
-                        number: "555 8426"
-                    }
-                    ListElement {
-                        text: "Sam Wise"
-                        number: "555 0473"
-                    }
-                    ListElement {
-                        text: "haha"
-                        number: "555 0473"
-                    }
+                property ListModel myPlaylists : playlists
 
+                 model: ListModel{
+                   id:playlists
+                  }
+                Component.onCompleted: {
 
+                    for(var song in museng.myPlaylists)
+                        playlists.append(museng.myPlaylists[song]);
                 }
                 delegate: Button {
                     id: control
                     width: parent.width
                     height: 45
-                    text: number
+                    text: name
                     font.pixelSize: 15
                     contentItem: Text {
                             text: control.text
@@ -271,7 +211,7 @@ ApplicationWindow {
                                     radius: 1
                                 }
                     onClicked: {
-                        console.log(_id)
+                        //museng.getPlaylist(name)
                     }
                 }
 
@@ -337,7 +277,7 @@ ApplicationWindow {
                                 museng.stopSound();
                              }
 
-                             if(!playButton.isPlaying && !museng.isPlaying())
+                             if(!playButton.isPlaying)
                                  playButton.isPlaying = !playButton.isPlaying;
 
                              textCurrentSong.text = "<b>" + title + "</b>" + " by " + "<b>" + artist + "</b>"
@@ -360,8 +300,10 @@ ApplicationWindow {
     InitializeEngine{
         id: museng
         property var myLibrary : []
+        property var myPlaylists : []
         Component.onCompleted: {
             myLibrary = museng.getLibrary()
+            myPlaylists = museng.getMyPlaylists()
 
         }
     }
@@ -376,9 +318,13 @@ ApplicationWindow {
         width: parent.width
 
         Button{
+            id: loop
+            property bool loopIt: false
             width:parent.width/6
             icon.source: "qrc:/src/icons/loop.svg"
-            padding:20
+            icon.color: loopIt ? "blue" : "black"
+            padding:20                    
+            onClicked: loopIt = !loopIt
         }
        Button{
            width:parent.width/6
@@ -390,15 +336,11 @@ ApplicationWindow {
            icon.source: "qrc:/src/icons/stop.svg"
            padding:20
            onClicked: {
-              if(museng.isPlaying()){
+              console.log(museng.isPlaying())
+              if(museng.isPlaying && playButton.isPlaying){
                   museng.stopSound();
-
-                  if(playButton.isPlaying)
-                      playButton.isPlaying = !playButton.isPlaying
-
-
+                  playButton.isPlaying = false
               }
-
            }
        }
        Button{
@@ -408,11 +350,10 @@ ApplicationWindow {
            icon.source: !isPlaying ? "qrc:/src/icons/play.svg" : "qrc:/src/icons/pause.svg"
            padding:20
            onClicked: {
-                if(!isPlaying && !museng.isPlaying())
+                if(!museng.isPlaying())
                     museng.playSound();
                 else{
-                    if( museng.isPlaying())
-                        museng.pauseSound();
+                    museng.pauseSound();
                 }
 
                isPlaying = !isPlaying;

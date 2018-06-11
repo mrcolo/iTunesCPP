@@ -24,6 +24,7 @@ void library::create_playlist()
 
 void library::add_to_library(string filepath)
 {
+
     song addedSong(filepath);
 
 
@@ -37,6 +38,7 @@ void library::add_to_library(string filepath)
 
     libraryObject.insert(QString::number(libCounter), songObject);
     libCounter++;
+
     saveJson("../../../../backend/library.json");
 }
 
