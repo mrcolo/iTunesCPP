@@ -61,8 +61,8 @@ void playlist::add_to_playlist(string filepath){
     song addedSong(filepath);
     QJsonObject songObject;
 
-        for(auto song : plistObject) {
-            if(song.toObject().value("path") == addedSong.getPath()){
+        for(int i = 0; i<plistArray.size(); i++) {
+            if(plistArray[i].toObject().value("path") == addedSong.getPath()){
                 dupe = true;
                 break;
             }
@@ -71,24 +71,26 @@ void playlist::add_to_playlist(string filepath){
     bool mp3_checker=addedSong.check_mp3();
 
     if(!dupe && mp3_checker){
+        songObject.insert("index", plistCounter);
         songObject.insert("title", addedSong.getTitle());
         songObject.insert("artist", addedSong.getArtist());
         songObject.insert("album", addedSong.getAlbum());
         songObject.insert("genre", addedSong.getGenre());
         songObject.insert("path", addedSong.getPath());
 
-    plistObject.insert(QString::number(plistCounter), songObject);
+    plistArray.append(songObject);
     plistCounter++;
     }
     else{
         cout<<"Song is already in playlist or is not an mp3 file"<<endl;
     }
+    saveJson(plist_path);
 }
 
 
 void playlist::saveJson(QString fileName)
 {
-    QJsonDocument doc(plistObject);
+    QJsonDocument doc(plistArray);
     qDebug() << doc.toJson();
 
     QFile jsonFile(fileName);
@@ -107,8 +109,8 @@ void playlist::readPlistJson(QString fileName)
 
     QJsonDocument libDocument = QJsonDocument::fromJson(libString.toUtf8());
     qWarning() << libDocument.isNull(); // <- print false
-    plistObject = libDocument.object();
-    qWarning() << plistObject.value(QString("title"));  // <- print my title
+    plistArray = libDocument.array();
+    qWarning() << plistArray[0].toObject().value(QString("title"));  // <- print my title
 }
 
 inline bool playlist::plistJsonExists (string fileName) {
@@ -118,7 +120,7 @@ inline bool playlist::plistJsonExists (string fileName) {
 }
 
 void playlist::setPlistCounter() {
-    for(auto song : plistObject) {
+    for(auto song : plistArray) {
         plistCounter++;
     }
 }
