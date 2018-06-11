@@ -11,7 +11,6 @@ InitializeEngine::InitializeEngine()
     museng = new musicEngine();
     lib = new library();
     museng->setWhatToPlay("../../../../example.mp3");
-
     qWarning()<<QDir::currentPath();
 }
 
@@ -132,4 +131,20 @@ void InitializeEngine::loop(){
     museng->loop();
 }
 
+QString InitializeEngine::getCurrentTime(){
+    return QString::fromStdString(museng->getCurrentTime());
+}
+
+QString InitializeEngine::getTotalTime(){
+    return QString::fromStdString(museng->getTotalTime());
+}
+
+QString InitializeEngine::totaltime(){
+    cout<<museng->music->getPlayLength();
+    return QString::fromStdString(to_string(museng->music->getPlayLength()));
+}
+QString InitializeEngine::currentime(){
+    qWarning()<<"FUCK"<<QString::fromStdString(to_string(museng->music->getPlayPosition()));
+    return QString::fromStdString(to_string(museng->music->getPlayPosition()));
+}
 
