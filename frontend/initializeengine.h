@@ -30,6 +30,10 @@ public:
     Q_INVOKABLE QJsonObject getPlaylist(QString name);
     Q_INVOKABLE QJsonObject getMyPlaylists();
     Q_INVOKABLE void addPlaylist(QString name, vector<string> mySongs);
+    Q_INVOKABLE QString getCurrentTime();
+    Q_INVOKABLE QString getTotalTime();
+    Q_INVOKABLE QString currentime();
+    Q_INVOKABLE QString totaltime();
 
 };
 

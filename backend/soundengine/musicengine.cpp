@@ -1,5 +1,6 @@
 #include "musicengine.h"
 #include <iostream>
+#include <math.h>
 
 using namespace irrklang;
 musicEngine::musicEngine()
@@ -105,10 +106,44 @@ void musicEngine::pause()
 {
     music->setIsPaused(music->getIsPaused() ? false : true);
 }
-
+//210546
 void musicEngine::stop()
 {
     music->stop();
+}
+
+string musicEngine::getTotalTime(){
+
+    if(music){
+        int seconds = (int) (music->getPlayLength() / 1000) % 60 ;
+        int minutes = (int) ((music->getPlayLength() / (1000*60)) % 60);
+        int hours   = (int) ((music->getPlayLength() / (1000*60*60)));
+
+        if(seconds < 10)
+            return (to_string(minutes) + ":0" + to_string(seconds));
+
+        return (to_string(minutes) + ":" + to_string(seconds));
+    }
+    else{
+        return "";
+    }
+
+}
+
+string musicEngine::getCurrentTime(){
+    if(music){
+        int seconds = (int) (music->getPlayPosition() / 1000) % 60 ;
+        int minutes = (int) ((music->getPlayPosition() / (1000*60)) % 60);
+        int hours   = (int) ((music->getPlayPosition() / (1000*60*60)));
+
+        if(seconds < 10)
+            return (to_string(minutes) + ":0" + to_string(seconds));
+
+        return (to_string(minutes) + ":" + to_string(seconds));
+    }
+    else{
+        return "";
+    }
 }
 
 

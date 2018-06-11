@@ -29,6 +29,15 @@ ApplicationWindow {
                }
            }
 
+           museng.myTotalTime = museng.getTotalTime()
+           museng.myCurrentTime = museng.getCurrentTime()
+           totalSong.text = museng.myTotalTime;
+           currentSong.text = museng.myCurrentTime;
+
+           //console.log(museng.currentime);
+
+           //console.log((parseInt(museng.currentime)*100/parseInt(museng.totaltime)))
+           //pointLength.value = (parseInt(museng.currentime)*100/parseInt(museng.totaltime));
 
            if(museng.isFinished() && playButton.isPlaying){
                 if(currentIndex + 1 <= museng.myLibrary.length){
@@ -121,7 +130,7 @@ ApplicationWindow {
                    onDropped: {
 
                        var myPath = drop.urls[0]
-                        console.log("works")
+
                        museng.addSong(myPath)
 
                        museng.myLibrary = museng.getLibrary();
@@ -143,7 +152,7 @@ ApplicationWindow {
         width: parent.width
         height:addPlaylist.height*2
         id: bella
-       color: "#E0E0E0"
+       color: "white"
 
        anchors.top: addPlaylist.bottom
        Text{
@@ -153,10 +162,11 @@ ApplicationWindow {
         y: parent.height/2-30
        }
        Text{
-        property int myCurrentTime : 23
-        id: remainingSong
-        text: "0:" + myCurrentTime
+        property int myCurrentTime : museng.getCurrentTime()
+        id: currentSong
+        text: myCurrentTime
         anchors.right: pointLength.left
+
         y: pointLength.y +10
 
        }
@@ -167,11 +177,12 @@ ApplicationWindow {
            x: textCurrentSong.x - 170
            width: 500
            from: 1
-           value: remainingSong.myCurrentTime
+           value: (parseInt(museng.myCurrentTime*100/museng.myTotalTime,10))
            to: 100
+
        }
        Text{
-        property string myTotalTime : "4:23"
+        property string myTotalTime : museng.myTotalTime
         id: totalSong
         text: myTotalTime
         anchors.left: pointLength.right
@@ -183,7 +194,7 @@ ApplicationWindow {
         class_name: "energized"
         width: parent.width
         id: addPlaylist
-       text: "Add Playlist"
+        text: "Add Playlist"
     }
     Grid {
         columns: 2
@@ -281,7 +292,7 @@ ApplicationWindow {
                                  text: control2.text
                                  font: control2.font
                                  opacity: enabled ? 1.0 : 0.3
-                                 color: control2.down || currentIndex+1 == index ? "#75bcff" : "#1386f2"
+                                 color: control2.down || currentIndex == index ? "#75bcff" : "#1386f2"
                                  horizontalAlignment: Text.AlignLeft
                                  verticalAlignment: Text.AlignVCenter
                                  elide: Text.ElideRight
@@ -305,7 +316,7 @@ ApplicationWindow {
 
                              textCurrentSong.text = "<b>" + title + "</b>" + " by " + "<b>" + artist + "</b>"
 
-                             myApp.currentIndex = index-1;
+                             myApp.currentIndex = index;
 
                              museng.setCurrent(path);
                              museng.playSound();
@@ -327,10 +338,18 @@ ApplicationWindow {
         id: museng
         property var myLibrary : []
         property var myPlaylists : []
+        property var totaltime;
+        property var currentime;
+        property var myTotalTime : []
+        property var myCurrentTime : []
         Component.onCompleted: {
             myLibrary = museng.getLibrary()
             myPlaylists = museng.getMyPlaylists()
+            myTotalTime = museng.getTotalTime()
+            myCurrentTime = museng.getCurrentTime()
+            totaltime = museng.totaltime();
 
+            currentime = museng.currentime();
         }
     }
 
@@ -358,7 +377,7 @@ ApplicationWindow {
            padding:20
            onClicked : {
                console.log(currentIndex)
-               if(currentIndex - 1 > 0){
+               if(currentIndex - 1 >= 0){
 
                    museng.stopSound();
                    myApp.currentIndex--;
