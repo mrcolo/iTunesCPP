@@ -116,7 +116,7 @@ QJsonObject InitializeEngine::getMyPlaylists(){
 }
 
 void InitializeEngine::addPlaylist(QString name, QVector<int> mySongs){
-    //lib->create_playlist(name, mySongs)
+    lib->create_playlist(name, mySongs);
 }
 
 bool InitializeEngine::isFinished(){

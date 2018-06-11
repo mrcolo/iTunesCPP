@@ -299,7 +299,7 @@ ApplicationWindow {
                text: "Add Playlist"
                onClicked: {
                    console.log(playlistPopup.myVector)
-                   //museng.addPlaylist(inputName.text, playlistPopup.myVector)
+                   museng.addPlaylist(inputName.text, playlistPopup.myVector)
                    playlistPopup.close()
                }
            }

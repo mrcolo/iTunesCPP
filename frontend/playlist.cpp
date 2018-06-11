@@ -2,7 +2,7 @@
 
 playlist::playlist(string name)
 {
-    string path="../../../../backend/";
+    string path="../../../../backend/playlists/";
     path.append(name);
     path.append(".json");
 
@@ -17,7 +17,8 @@ playlist::playlist(string name)
     plist_path = QString::fromStdString(path);
     setPlistCounter();
 
-    savePlaylist();
+    savePlaylistJson(plist_path);
+//    savePlaylist();
 
 }
 
@@ -83,7 +84,7 @@ void playlist::add_to_playlist(string filepath){
     else{
         cout<<"Song is already in playlist or is not an mp3 file"<<endl;
     }
-    saveJson(plist_path);
+    savePlaylistJson(plist_path);
 }
 
 
@@ -124,19 +125,28 @@ void playlist::setPlistCounter() {
     }
 }
 
-void playlist::savePlaylist(){
-    //meant to open playlist.txt, make vector of playlist name(string)
-    //, check if the currecnt playlsit name is present
-    //if so then erase it and put name at the back
-    //if not just append name to end of vector
-    //then rewrite the txt file so names are saved across runs
+void playlist::savePlaylistJson(QString fileName)
+{
+    QJsonDocument doc(plistArray);
 
-
-    ifstream name_file("../../../../playlists/playlists.txt");
-
-    name_file.close();
-
-
-    ofstream file("../../../../playlists/playlists.txt");
-    file.close();
+    QFile jsonFile(fileName);
+    jsonFile.open(QFile::WriteOnly);
+    jsonFile.write(doc.toJson());
 }
+
+//void playlist::savePlaylist(){
+//    //meant to open playlist.txt, make vector of playlist name(string)
+//    //, check if the currecnt playlsit name is present
+//    //if so then erase it and put name at the back
+//    //if not just append name to end of vector
+//    //then rewrite the txt file so names are saved across runs
+
+
+//    ifstream name_file("../../../../playlists/playlists.txt");
+
+//    name_file.close();
+
+
+//    ofstream file("../../../../playlists/playlists.txt");
+//    file.close();
+//}
