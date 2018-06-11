@@ -16,6 +16,9 @@ playlist::playlist(string name)
 
     plist_path = QString::fromStdString(path);
     setPlistCounter();
+
+    savePlaylist();
+
 }
 
 playlist::playlist(string name, QStringList songpathlist){
@@ -121,3 +124,19 @@ void playlist::setPlistCounter() {
     }
 }
 
+void playlist::savePlaylist(){
+    //meant to open playlist.txt, make vector of playlist name(string)
+    //, check if the currecnt playlsit name is present
+    //if so then erase it and put name at the back
+    //if not just append name to end of vector
+    //then rewrite the txt file so names are saved across runs
+
+
+    ifstream name_file("../../../../playlists/playlists.txt");
+
+    name_file.close();
+
+
+    ofstream file("../../../../playlists/playlists.txt");
+    file.close();
+}

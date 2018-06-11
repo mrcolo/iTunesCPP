@@ -9,38 +9,6 @@ song::song(string path_to_mp3)
     songf=TagLib::FileRef(mp3name);
     TagLib::Tag *tag = songf.tag();
 
-    /*
-    if(tag->title()==TagLib::String::null)
-        title="undefined";
-    else
-        title=QString::fromStdString(tag->title().toCString());
-
-
-    if(tag->artist()==TagLib::String::null)
-        artist="undefined";
-    else
-        artist=QString::fromStdString(tag->artist().toCString());
-
-
-    if(tag->album()==TagLib::String::null)
-        album="Undefined";
-    else
-        album=QString::fromStdString(tag->album().toCString());
-
-
-    if(tag->genre()==TagLib::String::null)
-        genre="Undefined";
-    else
-        genre=QString::fromStdString(tag->genre().toCString());
-
-
-    if(tag->()==TagLib::String::null)
-        path="Undefined";
-    else
-        path=QString::fromStdString(path_to_mp3.c_str());
-    */
-
-
     string temp_title=path_to_mp3.substr(path_to_mp3.find_last_of('/')+1, path_to_mp3.length());
 
     for(int i=0; i<4;++i)
@@ -79,9 +47,16 @@ QString song::getPath(){
 bool song::check_mp3(){
     string temp=path.QString::toStdString();
 
-    string check=temp.substr(temp.length()-4,temp.length());
+    string mp3=temp.substr(temp.length()-4,temp.length());
+    string wav=temp.substr(temp.length()-4,temp.length());
+    string flac=temp.substr(temp.length()-5,temp.length());
 
-    if(check==".mp3")
+
+    if(mp3==".mp3")
+        return true;
+    else if(wav==".wav")
+        return true;
+    else if(flac==".flac")
         return true;
     else
         return false;

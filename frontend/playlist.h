@@ -22,6 +22,7 @@ public:
     void saveJson(QString fileName);
     inline bool plistJsonExists(string fileName);
     void setPlistCounter();
+    void savePlaylist();
 
     //qstring list of unique id's for library
 
