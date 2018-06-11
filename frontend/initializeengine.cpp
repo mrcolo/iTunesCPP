@@ -64,7 +64,7 @@ void InitializeEngine::setCurrent(QString path){
     museng->setWhatToPlay(myPath);
 }
 
-QJsonObject InitializeEngine::getLibrary(){
+QJsonArray InitializeEngine::getLibrary(){
 
        QString val;
        QFile file;
@@ -75,10 +75,8 @@ QJsonObject InitializeEngine::getLibrary(){
        val = file.readAll();
        file.close();
 
-       QJsonDocument d = QJsonDocument::fromJson(val.toUtf8());
-
-       QJsonObject mySongs = d.object();
-
+       QJsonDocument doc = QJsonDocument::fromJson(val.toUtf8());
+       QJsonArray mySongs = doc.array();
 
        return mySongs;
 }
@@ -113,7 +111,7 @@ QJsonObject InitializeEngine::getMyPlaylists(){
         val = file.readAll();
 
         file.close();
-        qWarning()<<val;
+
         QJsonDocument d = QJsonDocument::fromJson(val.toUtf8());
 
         QJsonObject myPlaylists = d.object();

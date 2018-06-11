@@ -26,7 +26,7 @@ public:
     Q_INVOKABLE bool isPlaying();
     Q_INVOKABLE void pauseSound();
     Q_INVOKABLE void setCurrent(QString path);
-    Q_INVOKABLE QJsonObject getLibrary();
+    Q_INVOKABLE QJsonArray getLibrary();
     Q_INVOKABLE QJsonObject getPlaylist(QString name);
     Q_INVOKABLE QJsonObject getMyPlaylists();
     Q_INVOKABLE void addPlaylist(QString name, vector<string> mySongs);

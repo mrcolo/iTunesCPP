@@ -11,16 +11,15 @@ import io.qt.examples.initializeengine 1.0
 ApplicationWindow {
     function checkFinished() {
 
-            if(museng.isFinished() && !loop.loopIt)
-                playButton.isPlaying = false;
+
+
 
            if(museng.isFinished() && loop.loopIt && playButton.isPlaying)
                museng.playSound();
-           else
-               console.log("not finished")
+
 
         }
-
+    property int currentIndex
     id: myApp
     visible: true
     width: 800
@@ -283,6 +282,8 @@ ApplicationWindow {
                                  playButton.isPlaying = !playButton.isPlaying;
 
                              textCurrentSong.text = "<b>" + title + "</b>" + " by " + "<b>" + artist + "</b>"
+
+                             myApp.currentIndex = index;
                              museng.setCurrent(path);
                              museng.playSound();
 

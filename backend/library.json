@@ -1,23 +1,34 @@
-{
-    "1": {
-        "album": "",
-        "artist": "",
-        "genre": "",
-        "path": "/Users/francescocolonnese/Desktop/WilkinsonTest3/example.wav",
-        "title": ""
-    },
-    "2": {
-        "album": "Undefined",
-        "artist": "Undefined",
-        "genre": "Undefined",
-        "path": "/Users/francescocolonnese/Desktop/example.wav",
-        "title": "example"
-    },
-    "3": {
+[
+    {
         "album": "The Peace and the Panic",
         "artist": "Neck Deep",
         "genre": "Pop Punk",
+        "index": 1,
         "path": "/Users/francescocolonnese/Desktop/WilkinsonTest3/example.mp3",
         "title": "Heavy Lies"
+    },
+    {
+        "album": "The Peace and the Panic",
+        "artist": "Neck Deep",
+        "genre": "Pop Punk",
+        "index": 2,
+        "path": "/Users/francescocolonnese/Desktop/WilkinsonTest3/example.mp3",
+        "title": "Heavy Lies"
+    },
+    {
+        "album": "Undefined",
+        "artist": "Undefined",
+        "genre": "Undefined",
+        "index": 3,
+        "path": "/Users/francescocolonnese/Desktop/WilkinsonTest3/example.wav",
+        "title": "example"
+    },
+    {
+        "album": "Undefined",
+        "artist": "Undefined",
+        "genre": "Undefined",
+        "index": 4,
+        "path": "/Users/francescocolonnese/Desktop/WilkinsonTest3/example.wav",
+        "title": "example"
     }
-}
+]
