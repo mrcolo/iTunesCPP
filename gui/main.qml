@@ -9,24 +9,46 @@ import io.qt.examples.initializeengine 1.0
 
 
 ApplicationWindow {
+    Component.onCompleted: {
+        museng.myLibrary = museng.getLibrary();
+        museng.setCurrent(museng.myLibrary[currentIndex].path)
+        textCurrentSong.text = "<b>" + museng.myLibrary[currentIndex].title + "</b>" + " by " + "<b>" + museng.myLibrary[currentIndex].artist + "</b>"
+    }
     function checkFinished() {
-
-
-
-
            if(museng.isFinished() && loop.loopIt && playButton.isPlaying)
                museng.playSound();
 
+           if(museng.isFinished() && !loop.loopIt && shuffle.shuffleIt && playButton.isPlaying){
+               var newIndex = Math.random() * (museng.myLibrary.length);
 
+               if(newIndex <= museng.myLibrary.length && newIndex != currentIndex){
+                   currentIndex = newIndex
+                   museng.setCurrent(museng.myLibrary[currentIndex].path)
+                   textCurrentSong.text = "<b>" + museng.myLibrary[currentIndex].title + "</b>" + " by " + "<b>" + museng.myLibrary[currentIndex].artist + "</b>"
+                   museng.playSound();
+               }
+           }
+
+
+           if(museng.isFinished() && playButton.isPlaying){
+                if(currentIndex + 1 <= museng.myLibrary.length){
+                    currentIndex++;
+                    museng.setCurrent(museng.myLibrary[currentIndex].path)
+                    textCurrentSong.text = "<b>" + museng.myLibrary[currentIndex].title + "</b>" + " by " + "<b>" + museng.myLibrary[currentIndex].artist + "</b>"
+                    museng.playSound();
+                }
+           }
         }
-    property int currentIndex
+
+
     id: myApp
+    property int currentIndex : 0
     visible: true
     width: 800
     height: 1280
 
     Timer {
-        interval: 100
+        interval: 500
         running: true
         repeat: true
         onTriggered: checkFinished()
@@ -259,7 +281,7 @@ ApplicationWindow {
                                  text: control2.text
                                  font: control2.font
                                  opacity: enabled ? 1.0 : 0.3
-                                 color: control2.down ? "#75bcff" : "#1386f2"
+                                 color: control2.down || currentIndex+1 == index ? "#75bcff" : "#1386f2"
                                  horizontalAlignment: Text.AlignLeft
                                  verticalAlignment: Text.AlignVCenter
                                  elide: Text.ElideRight
@@ -283,7 +305,8 @@ ApplicationWindow {
 
                              textCurrentSong.text = "<b>" + title + "</b>" + " by " + "<b>" + artist + "</b>"
 
-                             myApp.currentIndex = index;
+                             myApp.currentIndex = index-1;
+
                              museng.setCurrent(path);
                              museng.playSound();
 
@@ -333,6 +356,20 @@ ApplicationWindow {
            width:parent.width/6
            icon.source: "qrc:/src/icons/previous.svg"
            padding:20
+           onClicked : {
+               console.log(currentIndex)
+               if(currentIndex - 1 > 0){
+
+                   museng.stopSound();
+                   myApp.currentIndex--;
+                   museng.setCurrent(museng.myLibrary[currentIndex].path)
+                   textCurrentSong.text = "<b>" + museng.myLibrary[currentIndex].title + "</b>" + " by " + "<b>" + museng.myLibrary[currentIndex].artist + "</b>"
+                   museng.playSound();
+               }
+
+
+
+           }
        }
        Button{
            width:parent.width/6
@@ -345,6 +382,8 @@ ApplicationWindow {
                else
                    if(!museng.isFinished())
                        museng.stopSound()
+
+               myApp.currentIndex = 0
 
                playButton.isPlaying = false
 
@@ -372,11 +411,28 @@ ApplicationWindow {
            width:parent.width/6
            icon.source: "qrc:/src/icons/next.svg"
            padding:20
+           onClicked:{
+               console.log(currentIndex)
+               if(currentIndex + 1 <= museng.myLibrary.length){
+                   museng.stopSound();
+                   myApp.currentIndex++;
+                   museng.setCurrent(museng.myLibrary[currentIndex].path)
+                   textCurrentSong.text = "<b>" + museng.myLibrary[currentIndex].title + "</b>" + " by " + "<b>" + museng.myLibrary[currentIndex].artist + "</b>"
+                   museng.playSound();
+               }
+
+           }
        }
        Button{
+           id: shuffle
+           property bool shuffleIt: false
            width:parent.width/6
            icon.source: "qrc:/src/icons/shuffle.svg"
+           icon.color: shuffleIt ? "blue" : "black"
            padding:20
+           onClicked : {
+            shuffleIt = !shuffleIt;
+           }
 
        }
     }
