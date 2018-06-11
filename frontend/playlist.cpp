@@ -32,18 +32,20 @@ playlist::playlist(string name, QStringList songpathlist){
     {
         readPlistJson(qpath);
         cout<<"library.json exists!"<<endl;
-    } else {
+    }
+    else {
         ofstream file(path);
         file.close();
         cout<<"library.json doesn't exist!"<<endl;
     }
 
+
     plist_path=qpath;
     setPlistCounter();
 
-//    for(int i=0; i<QStringList.size();++i){
-//        add_to_playlist(songpathlist[i].QString::toStdString())
-//    }
+    for(int i=0; i<songpathlist.size();++i){
+        add_to_playlist(songpathlist[i].QString::toStdString());
+    }
 
 }
 
@@ -53,91 +55,33 @@ playlist::~playlist(){
 }
 
 void playlist::add_to_playlist(string filepath){
+
+
     bool dupe=false;
     song addedSong(filepath);
     QJsonObject songObject;
 
-
-    /*
-/*
-//    for(auto song : plistObject) {
-//        if(plistObject(song)QString("path")==addedSong.getPath()){
-//            cout<<"Duplicate Song"<<endl;
-//            dupe=true;
-//        }
-//    }
-
-
-//    for(int i=0; i<plistObject.size(); ++i){
-//        if (plistObject[song]["path"]==addedSong.getPath()){
-//                        cout<<"Duplicate Song"<<endl;
-//                        dupe=true;
-//        }
-//    }
-
-//    QJsonArray json_arr;
-//        QJsonObject::const_iterator iter = plistObject.begin();
-
-//        while (iter != plistObject.end())
-//        {
-//            if ( iter->isObject() )
-//            {
-//                json_arr.append(ObjectToArray(iter->toObject()));
-//            }
-//            else
-//            {
-//                json_arr.append(*iter);
-//            }
-//            iter++;
-//        }
-
-
-//        QJsonArray qjs_arry=plistObject.getjsonarray;
-//        for(int i=0; i<json_arr.size();++i){
-//            if
-//        }
-*/
-
-    /*
-        QStringList path_list;
-        QJsonArray jsonArray = plistObject["path"].toArray();
-
-        foreach (const QJsonValue & value, jsonArray) {
-            QJsonObject obj = value.toObject();
-            path_list.append(obj["path"].toString());
-        }
-
-        for(int i=0; i<path_list.size(); ++i){
-            if(path_list[i]==plist_path){
-                dupe=true;
-                cout<<"duplicate"<<endl;
+        for(auto song : plistObject) {
+            if(song.toObject().value("path") == addedSong.getPath()){
+                dupe = true;
                 break;
             }
-
         }
-*/
 
+    bool mp3_checker=addedSong.check_mp3();
 
-    for(int i=0; i<plistCounter; ++i){
-        QString identity_str=QString::fromStdString(to_string(i));
-        QJsonValue tempval=plistObject["path"];
-        QString temp=tempval.toString();
-
-    }
-
-
-
-
-    bool checker=addedSong.check_mp3();
-    if(!dupe && checker){
-    songObject.insert("title", addedSong.getTitle());
-    songObject.insert("artist", addedSong.getArtist());
-    songObject.insert("album", addedSong.getAlbum());
-    songObject.insert("genre", addedSong.getGenre());
-    songObject.insert("path", addedSong.getPath());
+    if(!dupe && mp3_checker){
+        songObject.insert("title", addedSong.getTitle());
+        songObject.insert("artist", addedSong.getArtist());
+        songObject.insert("album", addedSong.getAlbum());
+        songObject.insert("genre", addedSong.getGenre());
+        songObject.insert("path", addedSong.getPath());
 
     plistObject.insert(QString::number(plistCounter), songObject);
     plistCounter++;
+    }
+    else{
+        cout<<"Song is already in playlist or is not an mp3 file"<<endl;
     }
 }
 
