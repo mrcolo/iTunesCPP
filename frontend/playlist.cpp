@@ -5,19 +5,16 @@ playlist::playlist(string name)
     string path="../../../../backend/";
     path.append(name);
     path.append(".json");
-    QString qpath=QString::fromStdString(path);
 
     if(plistJsonExists(path))
     {
-        readPlistJson(qpath);
-        cout<<"library.json exists!"<<endl;
-    } else {
-        ofstream file(path);
-        file.close();
-        cout<<"library.json doesn't exist!"<<endl;
+        cout<<"Playlist exists, Overwriting..."<<endl;
     }
 
-    plist_path=qpath;
+    ofstream file(path);
+    file.close();
+
+    plist_path = QString::fromStdString(path);
     setPlistCounter();
 }
 
@@ -31,12 +28,11 @@ playlist::playlist(string name, QStringList songpathlist){
     if(plistJsonExists(path))
     {
         readPlistJson(qpath);
-        cout<<"library.json exists!"<<endl;
+        cout<<"playlist with name "<<name<<" already exists!"<<endl;
     }
     else {
         ofstream file(path);
         file.close();
-        cout<<"library.json doesn't exist!"<<endl;
     }
 
 

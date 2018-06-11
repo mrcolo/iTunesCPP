@@ -28,7 +28,7 @@ public:
 private:
     vector<song> list;
 
-    int plistCounter = 1;
+    int plistCounter = 0;
     QString plist_path;
 //    QJsonObject plistObject;
     QJsonArray plistArray;

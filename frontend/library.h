@@ -11,7 +11,7 @@ class library
 public:
     library();
     ~library();
-    void create_playlist(string plist_name);
+    void create_playlist(string plistName, vector<int> pathVector);
     void add_to_library(string filepath);
     void readLibJson(QString fileName);
     void saveJson(QString fileName);
@@ -19,7 +19,7 @@ public:
     void setLibCounter();
 
 private:
-    int libCounter = 1;
+    int libCounter = 0;
     QJsonArray libraryArray;
 };
 

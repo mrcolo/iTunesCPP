@@ -13,32 +13,47 @@ library::library()
     }
     setLibCounter();
 }
+
 library::~library(){
     saveJson("../../../../backend/library.json");
 }
 
-void library::create_playlist(string plist_name)
+void library::create_playlist(string plistName, vector<int> pathVector)
 {
+    playlist newPlaylist(plistName);
+    for(int i : pathVector) {
+        newPlaylist.add_to_playlist(libraryArray[i].toObject().value("path").toString().toStdString());
+    }
 
 }
 
 void library::add_to_library(string filepath)
 {
-
+    bool dupe = false;
     song addedSong(filepath);
 
-
-    QJsonObject songObject;
-    songObject.insert("index", libCounter);
-    songObject.insert("title", addedSong.getTitle());
-    songObject.insert("artist", addedSong.getArtist());
-    songObject.insert("album", addedSong.getAlbum());
-    songObject.insert("genre", addedSong.getGenre());
-    songObject.insert("path", addedSong.getPath());
+    for(int i = 0; i<libraryArray.size(); i++) {
+        if(libraryArray[i].toObject().value("path") == addedSong.getPath()) {
+            dupe = true;
+            break;
+        }
+    }
 
 
-    libraryArray.append(songObject);
-    libCounter++;
+    if(!dupe && addedSong.check_mp3()) {
+        QJsonObject songObject;
+        songObject.insert("index", libCounter);
+        songObject.insert("title", addedSong.getTitle());
+        songObject.insert("artist", addedSong.getArtist());
+        songObject.insert("album", addedSong.getAlbum());
+        songObject.insert("genre", addedSong.getGenre());
+        songObject.insert("path", addedSong.getPath());
+
+        libraryArray.append(songObject);
+        libCounter++;
+    } else {
+        cout<<"Song is already in library or is not an mp3/wav/flac file."<<endl;
+    }
 
     saveJson("../../../../backend/library.json");
 }
