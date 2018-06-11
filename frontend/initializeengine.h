@@ -30,6 +30,7 @@ public:
     Q_INVOKABLE QJsonObject getPlaylist(QString name);
     Q_INVOKABLE QJsonObject getMyPlaylists();
     Q_INVOKABLE void addPlaylist(QString name, vector<string> mySongs);
+
 };
 
 #endif // INITIALIZEENGINE_H

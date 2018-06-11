@@ -11,6 +11,7 @@ InitializeEngine::InitializeEngine()
     museng = new musicEngine();
     lib = new library();
     museng->setWhatToPlay("../../../../example.mp3");
+
     qWarning()<<QDir::currentPath();
 }
 
@@ -78,6 +79,7 @@ QJsonObject InitializeEngine::getLibrary(){
 
        QJsonObject mySongs = d.object();
 
+
        return mySongs;
 }
 
@@ -88,6 +90,7 @@ QJsonObject InitializeEngine::getPlaylist(QString name){
 
 //        file.setFileName("../../../../backend/playlists/"+ name + ".json");
 //        file.open(QIODevice::ReadOnly | QIODevice::Text);
+
 
 //        val = file.readAll();
 //        file.close();
@@ -118,9 +121,9 @@ QJsonObject InitializeEngine::getMyPlaylists(){
         return myPlaylists;
 }
 
+
 void InitializeEngine::addPlaylist(QString name, vector<string> mySongs){
     //create object playlist with vector mySongs and name, name
-
 }
 
 bool InitializeEngine::isFinished(){

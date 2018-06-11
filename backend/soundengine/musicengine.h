@@ -12,6 +12,9 @@ using namespace std;
 #include "irrKlang.h"
 #include "ik_ISoundDeviceList.h"
 
+#include "../frontend/song.h"
+
+
 using namespace irrklang;
 
 enum musicEngineErrors {NO_MUSIC_TO_PLAY,
@@ -56,7 +59,7 @@ class musicEngine
         void onSoundStopped();
 
     private:
-        string currentPlay;
+        string currentPlay="";
         irrklang::ISoundEngine* engine;
         irrklang::ISound* music;
         irrklang::ISoundDeviceList* deviceList;

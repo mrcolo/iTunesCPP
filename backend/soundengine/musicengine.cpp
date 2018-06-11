@@ -159,8 +159,23 @@ void musicEngine::setPlayingOffset(float timeOffset)
 
 void musicEngine::setWhatToPlay(std::string whatToPlay)
 {
-   std::cout<<"Set current play as "<<whatToPlay<<std::endl;
-   currentPlay = whatToPlay;
+
+    std::cout<<"Set current play as "<<whatToPlay<<std::endl;
+
+    if (currentPlay == "")
+        currentPlay=whatToPlay;
+    else{
+   //string test=myPath.substr(7, myPath.length()-7);
+   song trial(whatToPlay);
+   std::cout<<"Title: "<<trial.getTitle().toStdString()<<endl;
+   std::cout<<"Artist: "<<trial.getArtist().toStdString()<<endl;
+   std::cout<<"Album: "<<trial.getAlbum().toStdString()<<endl;
+   std::cout<<"Genre: "<<trial.getGenre().toStdString()<<endl;
+   std::cout<<"Path: "<<trial.getPath().toStdString()<<endl;
+
+   //std::cout<<"Set current play as "<<whatToPlay<<std::endl;
+   currentPlay = trial.getPath().toStdString();
+    }
 }
 
 void musicEngine::onTimeOut()

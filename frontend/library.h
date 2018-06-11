@@ -11,7 +11,7 @@ class library
 public:
     library();
     ~library();
-    void create_playlist();
+    void create_playlist(string plist_name);
     void add_to_library(string filepath);
     void readLibJson(QString fileName);
     void saveJson(QString fileName);

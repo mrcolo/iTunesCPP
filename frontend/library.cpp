@@ -17,7 +17,7 @@ library::~library(){
     saveJson("../../../../backend/library.json");
 }
 
-void library::create_playlist()
+void library::create_playlist(string plist_name)
 {
 
 }

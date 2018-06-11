@@ -27,13 +27,14 @@ public:
     QString getAlbum();
     QString getGenre();
     QString getPath();
+    bool check_mp3();
 
 
 private:
-    QString title;
-    QString artist;
-    QString album;
-    QString genre;
+    QString title="Undefined";
+    QString artist="Undefined";
+    QString album="Undefined";
+    QString genre="Undefined";
     QString path;
 
     TagLib::FileRef songf;

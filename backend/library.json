@@ -5,5 +5,12 @@
         "genre": "",
         "path": "/Users/francescocolonnese/Desktop/WilkinsonTest3/example.wav",
         "title": ""
+    },
+    "2": {
+        "album": "Undefined",
+        "artist": "Undefined",
+        "genre": "Undefined",
+        "path": "/Users/francescocolonnese/Desktop/example.wav",
+        "title": "example"
     }
 }
