@@ -24,6 +24,7 @@ void library::create_playlist(string plist_name)
 
 void library::add_to_library(string filepath)
 {
+
     song addedSong(filepath);
 
 
@@ -38,6 +39,7 @@ void library::add_to_library(string filepath)
 
     libraryArray.append(songObject);
     libCounter++;
+
     saveJson("../../../../backend/library.json");
 }
 

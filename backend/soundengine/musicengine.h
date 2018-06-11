@@ -43,8 +43,8 @@ class musicEngine
         float getBalance();
 
         void play();
-        void loop(bool yes);
-        void shuffle(bool yes);
+        void loop();
+        bool isFinished();
         void pause ();
         void stop ();
         void fastForward();

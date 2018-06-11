@@ -69,13 +69,17 @@ QStringList& musicEngine::getDevices()
 }
 */
 
-void musicEngine::loop(bool yes)
+void musicEngine::loop()
 {
-
+    if(music->isFinished())
+       play();
 }
 
-void musicEngine::shuffle(bool yes){
+bool musicEngine::isFinished(){
+    if(music)
+        return music->isFinished();
 
+    return true;
 }
 
 void musicEngine::play()
@@ -94,6 +98,7 @@ void musicEngine::play()
         std::cout<<"not working";
     }
 
+
 }
 
 void musicEngine::pause()
@@ -104,7 +109,6 @@ void musicEngine::pause()
 void musicEngine::stop()
 {
     music->stop();
-    music->drop();
 }
 
 
