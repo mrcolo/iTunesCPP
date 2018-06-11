@@ -146,10 +146,21 @@ string musicEngine::getCurrentTime(){
     }
 }
 
-
+int musicEngine::getTotalTimeInMilliseconds(){
+    if(music)
+        return (int) (music->getPlayLength());
+}
+int musicEngine::getCurrentTimeInMilliseconds(){
+    if(music)
+        return (int) (music->getPlayPosition());
+}
 void musicEngine::onSoundStopped()
 {
 
+}
+
+void musicEngine::setPos(int pos){
+    music->setPlayPosition((ik_u32)(pos));
 }
 
 void musicEngine::fastForward()

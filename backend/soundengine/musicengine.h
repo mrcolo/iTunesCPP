@@ -59,12 +59,14 @@ class musicEngine
         void onSoundStopped();
         string getTotalTime();
         string getCurrentTime();
-        irrklang::ISound* music;
+        int getTotalTimeInMilliseconds();
+        int getCurrentTimeInMilliseconds();
+        void setPos(int pos);
 
     private:
         string currentPlay="";
         irrklang::ISoundEngine* engine;
-
+        irrklang::ISound* music;
         irrklang::ISoundDeviceList* deviceList;
         ik_f32 balance, volume;
         QStringList listOfDevices;

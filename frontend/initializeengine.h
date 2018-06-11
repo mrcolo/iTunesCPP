@@ -34,6 +34,7 @@ public:
     Q_INVOKABLE QString getTotalTime();
     Q_INVOKABLE QString currentime();
     Q_INVOKABLE QString totaltime();
+    Q_INVOKABLE void setPos(int pos);
 
 };
 

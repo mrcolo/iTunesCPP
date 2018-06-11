@@ -10,8 +10,6 @@ InitializeEngine::InitializeEngine()
 {
     museng = new musicEngine();
     lib = new library();
-    museng->setWhatToPlay("../../../../example.mp3");
-    qWarning()<<QDir::currentPath();
 }
 
 InitializeEngine::~InitializeEngine()
@@ -20,7 +18,6 @@ InitializeEngine::~InitializeEngine()
 
 }
 void InitializeEngine::addSong(QString path){
-    qWarning()<<path;
     string myPath = "/" + path.toStdString().substr(8, path.length()-8);
 
     std::cout<<myPath<<std::endl;
@@ -118,7 +115,6 @@ QJsonObject InitializeEngine::getMyPlaylists(){
         return myPlaylists;
 }
 
-
 void InitializeEngine::addPlaylist(QString name, vector<string> mySongs){
     //create object playlist with vector mySongs and name, name
 }
@@ -140,11 +136,11 @@ QString InitializeEngine::getTotalTime(){
 }
 
 QString InitializeEngine::totaltime(){
-    cout<<museng->music->getPlayLength();
-    return QString::fromStdString(to_string(museng->music->getPlayLength()));
+    return QString::fromStdString(to_string(museng->getTotalTimeInMilliseconds()));
 }
 QString InitializeEngine::currentime(){
-    qWarning()<<"FUCK"<<QString::fromStdString(to_string(museng->music->getPlayPosition()));
-    return QString::fromStdString(to_string(museng->music->getPlayPosition()));
+    return QString::fromStdString(to_string(museng->getCurrentTimeInMilliseconds()));
 }
-
+void InitializeEngine::setPos(int pos){
+    museng->setPos(pos);
+}

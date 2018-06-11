@@ -1,58 +1,26 @@
 [
     {
-        "album": "The Peace and the Panic",
-        "artist": "Neck Deep",
-        "genre": "Pop Punk",
+        "album": "Undefined",
+        "artist": "Undefined",
+        "genre": "Undefined",
         "index": 0,
-        "path": "/Users/francescocolonnese/Desktop/WilkinsonTest3/example.mp3",
-        "title": "Heavy Lies"
+        "path": "/Users/francescocolonnese/Desktop/WilkinsonTest3/example.wav",
+        "title": "example"
     },
     {
-        "album": "The Peace and the Panic",
-        "artist": "Neck Deep",
-        "genre": "Pop Punk",
+        "album": "Undefined",
+        "artist": "Undefined",
+        "genre": "Undefined",
         "index": 1,
-        "path": "/Users/francescocolonnese/Music/myMusic/04. Parachute.mp3",
-        "title": "Parachute"
+        "path": "/Users/francescocolonnese/Desktop/bella.wav",
+        "title": "bella"
     },
     {
         "album": "The Peace and the Panic",
         "artist": "Neck Deep",
         "genre": "Pop Punk",
         "index": 2,
-        "path": "/Users/francescocolonnese/Music/myMusic/10. 19 Seventy Sumthin'.mp3",
-        "title": "19 Seventy Sumthin'"
-    },
-    {
-        "album": "The Peace and the Panic",
-        "artist": "Neck Deep",
-        "genre": "Pop Punk",
-        "index": 3,
-        "path": "/Users/francescocolonnese/Music/myMusic/09. Heavy Lies.mp3",
-        "title": "Heavy Lies"
-    },
-    {
-        "album": "The Peace and the Panic",
-        "artist": "Neck Deep",
-        "genre": "Pop Punk",
-        "index": 4,
-        "path": "/Users/francescocolonnese/Music/myMusic/02. Happy Judgement Day.mp3",
-        "title": "Happy Judgement Day"
-    },
-    {
-        "album": "The Peace and the Panic",
-        "artist": "Neck Deep",
-        "genre": "Pop Punk",
-        "index": 5,
-        "path": "/Users/francescocolonnese/Music/myMusic/01. Motion Sickness.mp3",
-        "title": "Motion Sickness"
-    },
-    {
-        "album": "The Peace and the Panic",
-        "artist": "Neck Deep",
-        "genre": "Pop Punk",
-        "index": 6,
-        "path": "/Users/francescocolonnese/Music/myMusic/05. In Bloom.mp3",
-        "title": "In Bloom"
+        "path": "/Users/francescocolonnese/Music/myMusic/04. Parachute.mp3",
+        "title": "Parachute"
     }
 ]

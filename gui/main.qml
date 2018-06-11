@@ -31,12 +31,12 @@ ApplicationWindow {
 
            museng.myTotalTime = museng.getTotalTime()
            museng.myCurrentTime = museng.getCurrentTime()
+
            totalSong.text = museng.myTotalTime;
            currentSong.text = museng.myCurrentTime;
 
-           //console.log(museng.currentime);
-
-           //console.log((parseInt(museng.currentime)*100/parseInt(museng.totaltime)))
+           museng.currenTime = museng.currentime()
+           museng.totalTime = museng.totaltime()
            //pointLength.value = (parseInt(museng.currentime)*100/parseInt(museng.totaltime));
 
            if(museng.isFinished() && playButton.isPlaying){
@@ -166,7 +166,6 @@ ApplicationWindow {
         id: currentSong
         text: myCurrentTime
         anchors.right: pointLength.left
-
         y: pointLength.y +10
 
        }
@@ -177,9 +176,11 @@ ApplicationWindow {
            x: textCurrentSong.x - 170
            width: 500
            from: 1
-           value: (parseInt(museng.myCurrentTime*100/museng.myTotalTime,10))
+           value: (parseInt(museng.currenTime*100/museng.totalTime))
            to: 100
-
+           onPressedChanged: {
+               museng.setPos((pointLength.value* parseInt(museng.totalTime))/100);
+           }
        }
        Text{
         property string myTotalTime : museng.myTotalTime
@@ -338,8 +339,8 @@ ApplicationWindow {
         id: museng
         property var myLibrary : []
         property var myPlaylists : []
-        property var totaltime;
-        property var currentime;
+        property var totalTime;
+        property var currenTime;
         property var myTotalTime : []
         property var myCurrentTime : []
         Component.onCompleted: {
@@ -347,9 +348,9 @@ ApplicationWindow {
             myPlaylists = museng.getMyPlaylists()
             myTotalTime = museng.getTotalTime()
             myCurrentTime = museng.getCurrentTime()
-            totaltime = museng.totaltime();
+            currenTime = museng.currentime();
+            totalTime = museng.totaltime();
 
-            currentime = museng.currentime();
         }
     }
 
