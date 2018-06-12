@@ -3,8 +3,6 @@
 playlist::playlist(string name)
 {    
     plist_name=QString::fromStdString(name);
-
-    checkPlaylist();
     readNameJson();
     addname();
 
@@ -102,27 +100,6 @@ inline bool playlist::plistJsonExists (string fileName) {
 void playlist::setPlistCounter() {
     for(auto song : plistArray) {
         plistCounter++;
-    }
-}
-
-
-void playlist::checkPlaylist(){
-    ifstream f("../../../../backend/playlists/myPlaylists.json");
-    //checks if there is any playlist record txt file and if not makes it
-    if(!f.good()){
-        ofstream file("../../../../backend/playlists/myPlaylists.json");
-        file.close();
-        cout<<"playlist record didn't exist, making now"<<endl;
-        QJsonArray arry;
-        QJsonObject nameObject;
-        nameObject.insert("name", "Library");
-        arry.append(nameObject);
-
-        QJsonDocument doc(arry);
-        QFile jsonFile("../../../../backend/playlists/myPlaylists.json");
-        jsonFile.open(QFile::WriteOnly);
-        jsonFile.write(doc.toJson());
-        //addname();
     }
 }
 

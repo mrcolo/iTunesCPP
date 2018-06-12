@@ -25,7 +25,6 @@ public:
 
     void savePlaylistJson(QString fileName);
 
-      void checkPlaylist();//if doesnt exist creates one
       bool checkforDupe();//checks if playlist name already exists
       void addname();//adds name to nameArray
       void readNameJson();//read playlist names into an array

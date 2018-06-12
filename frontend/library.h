@@ -17,6 +17,7 @@ public:
     void saveJson(QString fileName);
     inline bool libJsonExists(string fileName);
     void setLibCounter();
+    void checkPlaylist();
 
 private:
     int libCounter = 0;

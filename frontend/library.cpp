@@ -11,6 +11,7 @@ library::library()
         file.close();
         cout<<"library.json doesn't exist!"<<endl;
     }
+    checkPlaylist();
     setLibCounter();
 }
 
@@ -91,5 +92,25 @@ inline bool library::libJsonExists (string fileName) {
 void library::setLibCounter() {
     for(auto song : libraryArray) {
         libCounter++;
+    }
+}
+
+void library::checkPlaylist(){
+    ifstream f("../../../../backend/playlists/myPlaylists.json");
+    //checks if there is any playlist record txt file and if not makes it
+    if(!f.good()){
+        ofstream file("../../../../backend/playlists/myPlaylists.json");
+        file.close();
+        cout<<"playlist record didn't exist, making now"<<endl;
+        QJsonArray arry;
+        QJsonObject nameObject;
+        nameObject.insert("name", "Library");
+        arry.append(nameObject);
+
+        QJsonDocument doc(arry);
+        QFile jsonFile("../../../../backend/playlists/myPlaylists.json");
+        jsonFile.open(QFile::WriteOnly);
+        jsonFile.write(doc.toJson());
+        //addname();
     }
 }

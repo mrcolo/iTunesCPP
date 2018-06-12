@@ -5,6 +5,7 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 #include <QDir>
+#include "playlist.h"
 
 InitializeEngine::InitializeEngine()
 {
