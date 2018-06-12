@@ -16,26 +16,22 @@ InitializeEngine::InitializeEngine()
 InitializeEngine::~InitializeEngine()
 {
      delete museng;
-
+     delete lib;
 }
+
 void InitializeEngine::addSong(QString path){
     string myPath = "/" + path.toStdString().substr(8, path.length()-8);
-
-
-
-    //account for anything that is not mp3 or wav or flac
-
     lib->add_to_library(myPath);
 
 }
+
 void InitializeEngine::playSound(){
     musicIsPlaying = true;
     museng->play();
-
 }
+
 void InitializeEngine::setVolume(int volume){
     museng->setVolume(volume);
-
 }
 
 void InitializeEngine::pauseSound(){
@@ -140,6 +136,7 @@ QString InitializeEngine::totaltime(){
 QString InitializeEngine::currentime(){
     return QString::fromStdString(to_string(museng->getCurrentTimeInMilliseconds()));
 }
+
 void InitializeEngine::setPos(int pos){
     museng->setPos(pos);
 }

@@ -106,7 +106,7 @@ void musicEngine::pause()
 {
     music->setIsPaused(music->getIsPaused() ? false : true);
 }
-//210546
+
 void musicEngine::stop()
 {
     music->stop();
@@ -134,7 +134,7 @@ string musicEngine::getCurrentTime(){
     if(music){
         int seconds = (int) (music->getPlayPosition() / 1000) % 60 ;
         int minutes = (int) ((music->getPlayPosition() / (1000*60)) % 60);
-        //int hours   = (int) ((music->getPlayPosition() / (1000*60*60)));
+        int hours   = (int) ((music->getPlayPosition() / (1000*60*60)));
 
         if(seconds < 10)
             return (to_string(minutes) + ":0" + to_string(seconds));
@@ -205,17 +205,11 @@ void musicEngine::setPlayingOffset(float timeOffset)
 
 void musicEngine::setWhatToPlay(std::string whatToPlay)
 {
-
-
-
     if (currentPlay == "")
         currentPlay=whatToPlay;
     else{
-   //string test=myPath.substr(7, myPath.length()-7);
-   song trial(whatToPlay);
-
-   //std::cout<<"Set current play as "<<whatToPlay<<std::endl;
-   currentPlay = trial.getPath().toStdString();
+        song trial(whatToPlay);
+        currentPlay = trial.getPath().toStdString();
     }
 }
 
