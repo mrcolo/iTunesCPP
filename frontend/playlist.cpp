@@ -115,7 +115,7 @@ void playlist::checkPlaylist(){
         cout<<"playlist record didn't exist, making now"<<endl;
         QJsonArray arry;
         QJsonObject nameObject;
-        nameObject.insert("name", "library");
+        nameObject.insert("name", "Library");
         arry.append(nameObject);
 
         QJsonDocument doc(arry);

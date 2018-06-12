@@ -94,7 +94,7 @@ QJsonArray InitializeEngine::getPlaylist(QString name){
     return mySongs;
 }
 
-QJsonObject InitializeEngine::getMyPlaylists(){
+QJsonArray InitializeEngine::getMyPlaylists(){
 
         QString val;
         QFile file;
@@ -103,12 +103,12 @@ QJsonObject InitializeEngine::getMyPlaylists(){
         file.open(QIODevice::ReadOnly | QIODevice::Text);
 
         val = file.readAll();
-
+        qWarning()<<val;
         file.close();
 
         QJsonDocument d = QJsonDocument::fromJson(val.toUtf8());
 
-        QJsonObject myPlaylists = d.object();
+        QJsonArray myPlaylists = d.array();
 
         return myPlaylists;
 }

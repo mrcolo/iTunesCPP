@@ -150,7 +150,7 @@ ApplicationWindow {
                        for(var song in museng.myLibrary)
                            viewSongsList.bella.append(museng.myLibrary[song]);
 
-                        console.log(viewSongsList.bella)
+
                        inputArea.text = "Drag a Song here"
                        popup.close();
                    }
@@ -298,8 +298,13 @@ ApplicationWindow {
                id: addThisPlaylist
                text: "Add Playlist"
                onClicked: {
-                   console.log(playlistPopup.myVector)
                    museng.addPlaylist(inputName.text, playlistPopup.myVector)
+                   museng.myPlaylists = museng.getMyPlaylists();
+                   viewmyPlaylistsview.myPlaylists.clear();
+
+                   for(var playlist in museng.myPlaylists)
+                       viewmyPlaylistsview.myPlaylists.append(museng.myPlaylists[playlist])
+
                    playlistPopup.close()
                }
            }
@@ -335,7 +340,7 @@ ApplicationWindow {
 
             ListView {
                 property ListModel myPlaylists : playlists
-
+                id: viewmyPlaylistsview
                  model: ListModel{
                    id:playlists
                   }
@@ -495,6 +500,7 @@ ApplicationWindow {
         Component.onCompleted: {
             myLibrary = museng.getLibrary()
             myPlaylists = museng.getMyPlaylists()
+
             myTotalTime = museng.getTotalTime()
             myCurrentTime = museng.getCurrentTime()
             currenTime = museng.currentime();
@@ -565,7 +571,7 @@ ApplicationWindow {
            icon.source: "qrc:/src/icons/stop.svg"
            padding:20
            onClicked: {
-              console.log(museng.isPlaying())
+
                if(museng.isPlaying())
                   museng.stopSound();
                else
