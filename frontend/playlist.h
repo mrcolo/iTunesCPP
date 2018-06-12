@@ -22,18 +22,24 @@ public:
     void saveJson(QString fileName);
     inline bool plistJsonExists(string fileName);
     void setPlistCounter();
-    void savePlaylistJson(QString fileName);
-//    void savePlaylist();
 
-    //qstring list of unique id's for library
+    void savePlaylistJson(QString fileName);
+
+      void checkPlaylist();//if doesnt exist creates one
+      bool checkforDupe();//checks if playlist name already exists
+      void addname();//adds name to nameArray
+      void readNameJson();//read playlist names into an array
+      void savePlaylistName();//rewrite myPlaylist.json for updated list of names
+
+
 
 private:
     vector<song> list;
 
     int plistCounter = 0;
-    QString plist_path;
-//    QJsonObject plistObject;
+    QString plist_path, plist_name;
     QJsonArray plistArray;
+    QJsonArray nameArray;
 
 };
 

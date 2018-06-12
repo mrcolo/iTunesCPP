@@ -1,7 +1,13 @@
 #include "playlist.h"
 
 playlist::playlist(string name)
-{
+{    
+    plist_name=QString::fromStdString(name);
+
+    checkPlaylist();
+    readNameJson();
+    addname();
+
     string path="../../../../backend/playlists/";
     path.append(name);
     path.append(".json");
@@ -17,38 +23,10 @@ playlist::playlist(string name)
     plist_path = QString::fromStdString(path);
     setPlistCounter();
 
-    savePlaylistJson(plist_path);
-//    savePlaylist();
+//    savePlaylistJson(plist_path);
+    savePlaylistName();
 
 }
-
-playlist::playlist(string name, QStringList songpathlist){
-
-    string path="../../../../backend/";
-    path.append(name);
-    path.append(".json");
-    QString qpath=QString::fromStdString(path);
-
-    if(plistJsonExists(path))
-    {
-        readPlistJson(qpath);
-        cout<<"playlist with name "<<name<<" already exists!"<<endl;
-    }
-    else {
-        ofstream file(path);
-        file.close();
-    }
-
-
-    plist_path=qpath;
-    setPlistCounter();
-
-    for(int i=0; i<songpathlist.size();++i){
-        add_to_playlist(songpathlist[i].QString::toStdString());
-    }
-
-}
-
 
 playlist::~playlist(){
     saveJson(plist_path);
@@ -84,7 +62,9 @@ void playlist::add_to_playlist(string filepath){
     else{
         cout<<"Song is already in playlist or is not an mp3 file"<<endl;
     }
-    savePlaylistJson(plist_path);
+    //savePlaylistJson(plist_path);
+    saveJson(plist_path);
+
 }
 
 
@@ -125,28 +105,69 @@ void playlist::setPlistCounter() {
     }
 }
 
-void playlist::savePlaylistJson(QString fileName)
-{
-    QJsonDocument doc(plistArray);
 
-    QFile jsonFile(fileName);
+void playlist::checkPlaylist(){
+    ifstream f("../../../../backend/playlists/myPlaylists.json");
+    //checks if there is any playlist record txt file and if not makes it
+    if(!f.good()){
+        ofstream file("../../../../backend/playlists/myPlaylists.json");
+        file.close();
+        cout<<"playlist record didn't exist, making now"<<endl;
+        QJsonArray arry;
+        QJsonObject nameObject;
+        nameObject.insert("name", "library");
+        arry.append(nameObject);
+
+        QJsonDocument doc(arry);
+        QFile jsonFile("../../../../backend/playlists/myPlaylists.json");
+        jsonFile.open(QFile::WriteOnly);
+        jsonFile.write(doc.toJson());
+        //addname();
+    }
+}
+
+bool playlist::checkforDupe(){
+//assumes name array already set through readNameJson
+    for(int i=0; i<nameArray.size();++i){
+        if(nameArray[i].toObject().value("name") == plist_name)
+            return true;
+    }
+    return false;
+}
+
+void playlist::addname(){
+    //adds playlist name to namearray if its not a dupe
+    if(!checkforDupe()){
+
+    QJsonObject nameObject;
+    nameObject.insert("name", plist_name);
+    nameArray.append(nameObject);
+    }
+    else{
+        cout<<"duplicate already named"<<endl;
+    }
+}
+
+void playlist::readNameJson(){//gets names in file and puts in name array
+    QString nameString;
+    QFile file;
+    file.setFileName("../../../../backend/playlists/myPlaylists.json");
+    file.open(QIODevice::ReadOnly | QIODevice::Text);
+    nameString = file.readAll();
+    file.close();
+
+    QJsonDocument Document = QJsonDocument::fromJson(nameString.toUtf8());
+    qWarning() << Document.isNull(); // <- print false
+    nameArray = Document.array();
+    qWarning() << nameArray[0];  // <- print my title
+}
+
+void playlist::savePlaylistName(){
+    QJsonDocument doc(nameArray);
+    qDebug() << doc.toJson();
+
+    QFile jsonFile("../../../../backend/playlists/myPlaylists.json");
     jsonFile.open(QFile::WriteOnly);
     jsonFile.write(doc.toJson());
 }
 
-//void playlist::savePlaylist(){
-//    //meant to open playlist.txt, make vector of playlist name(string)
-//    //, check if the currecnt playlsit name is present
-//    //if so then erase it and put name at the back
-//    //if not just append name to end of vector
-//    //then rewrite the txt file so names are saved across runs
-
-
-//    ifstream name_file("../../../../playlists/playlists.txt");
-
-//    name_file.close();
-
-
-//    ofstream file("../../../../playlists/playlists.txt");
-//    file.close();
-//}
