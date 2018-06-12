@@ -311,6 +311,10 @@ ApplicationWindow {
         text: "Add Playlist"
         onClicked: {
             playlistPopup.myVector = [];
+            museng.myLibrary = museng.getLibrary()
+            viewSongsListPlaylist.bella.clear()
+            for(var song in museng.myLibrary)
+                viewSongsListPlaylist.bella.append(museng.myLibrary[song]);
             playlistPopup.open();
 
         }
