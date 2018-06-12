@@ -77,23 +77,21 @@ QJsonArray InitializeEngine::getLibrary(){
        return mySongs;
 }
 
-QJsonObject InitializeEngine::getPlaylist(QString name){
-          //qWarning()<<name;
-//        QString val;
-//        QFile file;
+QJsonArray InitializeEngine::getPlaylist(QString name){
 
-//        file.setFileName("../../../../backend/playlists/"+ name + ".json");
-//        file.open(QIODevice::ReadOnly | QIODevice::Text);
+    QString val;
+    QFile file;
 
+    file.setFileName("../../../../backend/playlists/" + name + ".json");
+    file.open(QIODevice::ReadOnly | QIODevice::Text);
 
-//        val = file.readAll();
-//        file.close();
+    val = file.readAll();
+    file.close();
 
-//        QJsonDocument d = QJsonDocument::fromJson(val.toUtf8());
+    QJsonDocument doc = QJsonDocument::fromJson(val.toUtf8());
+    QJsonArray mySongs = doc.array();
 
-//        QJsonObject mySongs = d.object();
-
-//        return mySongs;
+    return mySongs;
 }
 
 QJsonObject InitializeEngine::getMyPlaylists(){

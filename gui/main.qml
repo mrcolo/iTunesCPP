@@ -315,6 +315,7 @@ ApplicationWindow {
             viewSongsListPlaylist.bella.clear()
             for(var song in museng.myLibrary)
                 viewSongsListPlaylist.bella.append(museng.myLibrary[song]);
+
             playlistPopup.open();
 
         }
@@ -368,7 +369,33 @@ ApplicationWindow {
                                     radius: 1
                                 }
                     onClicked: {
-                        //museng.getPlaylist(name)
+                        if(name != "Library"){
+                            museng.myLibrary = museng.getPlaylist(name)
+                            myApp.currentIndex = 0
+
+                            viewSongsListPlaylist.bella.clear()
+                            viewSongsList.bella.clear();
+
+                            for(var song in museng.myLibrary){
+                                viewSongsListPlaylist.bella.append(museng.myLibrary[song]);
+                                viewSongsList.bella.append(museng.myLibrary[song]);
+                            }
+                        }
+                        else{
+                            museng.myLibrary = museng.getLibrary();
+                            myApp.currentIndex = 0
+
+                            viewSongsListPlaylist.bella.clear()
+                            viewSongsList.bella.clear();
+
+                            for(var song in museng.myLibrary){
+                                viewSongsListPlaylist.bella.append(museng.myLibrary[song]);
+                                viewSongsList.bella.append(museng.myLibrary[song]);
+                            }
+
+                        }
+
+
                     }
                 }
 

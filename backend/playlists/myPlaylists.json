@@ -1,8 +1,11 @@
 {
     "1": {
-        "name": "Alternative Tunes"
+        "name": "Library"
     },
     "2": {
         "name": "Chill Vibes"
+    },
+    "3": {
+        "name": "Alternative Tunes"
     }
 }
