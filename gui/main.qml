@@ -21,7 +21,7 @@ ApplicationWindow {
             myApp.isReduced = !myApp.isReduced;
         }
     }
-    function checkFinished() {
+    function myCurrentLoop() {
            if(museng.isFinished() && loop.loopIt && playButton.isPlaying)
                museng.playSound();
 
@@ -54,7 +54,6 @@ ApplicationWindow {
                 }
            }
 
-
            counterplaylist.text = "You Selected " + playlistPopup.myVector.length + " Elements"
         }
 
@@ -70,7 +69,7 @@ ApplicationWindow {
         interval: 500
         running: true
         repeat: true
-        onTriggered: checkFinished()
+        onTriggered: myCurrentLoop()
     }
     FontLoader{ source: "qrc:/src/fonts/fontawesome-webfont.ttf"}
 
@@ -183,13 +182,15 @@ ApplicationWindow {
        Slider {
             id: pointLength
            anchors.top: textCurrentSong.bottom
+
            x: textCurrentSong.x - 170
            width: 500
            from: 1
            value: (parseInt(museng.currenTime*100/museng.totalTime))
            to: 100
            onPressedChanged: {
-               museng.setPos((pointLength.value* parseInt(museng.totalTime))/100);
+               if(museng.myLibrary.length > 0)
+                    museng.setPos((pointLength.value* parseInt(museng.totalTime))/100);
            }
        }
        Text{
@@ -532,6 +533,7 @@ ApplicationWindow {
            icon.source: "qrc:/src/icons/previous.svg"
            padding:20
            onClicked : {
+               if(museng.myLibrary.length > 0){
                if(shuffle.shuffleIt){
                    var newIndex = Math.random() * (museng.myLibrary.length);
 
@@ -565,6 +567,7 @@ ApplicationWindow {
 
 
            }
+           }
        }
        Button{
            width:parent.width/6
@@ -593,15 +596,19 @@ ApplicationWindow {
            icon.source: !isPlaying ? "qrc:/src/icons/play.svg" : "qrc:/src/icons/pause.svg"
            padding:20
            onClicked: {
-              if(museng.isPlaying())
-                museng.pauseSound();
-              else
-                if(museng.isFinished())
-                    museng.playSound()
-                else
-                    museng.pauseSound()
+               if(museng.myLibrary.length > 0){
+                   if(museng.isPlaying())
+                     museng.pauseSound();
+                   else
+                     if(museng.isFinished())
+                         museng.playSound()
+                     else
+                         museng.pauseSound()
 
-               isPlaying = !isPlaying;
+                    isPlaying = !isPlaying;
+               }
+
+
            }
        }
        Button{
@@ -609,6 +616,7 @@ ApplicationWindow {
            icon.source: "qrc:/src/icons/next.svg"
            padding:20
            onClicked:{
+               if(museng.myLibrary.length > 0){
                if(shuffle.shuffleIt){
                    var newIndex = Math.random() * (museng.myLibrary.length);
 
@@ -640,6 +648,7 @@ ApplicationWindow {
                if(!playButton.isPlaying)
                    playButton.isPlaying = true
 
+           }
            }
        }
        Button{

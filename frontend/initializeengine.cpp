@@ -21,7 +21,7 @@ InitializeEngine::~InitializeEngine()
 void InitializeEngine::addSong(QString path){
     string myPath = "/" + path.toStdString().substr(8, path.length()-8);
 
-    std::cout<<myPath<<std::endl;
+
 
     //account for anything that is not mp3 or wav or flac
 
@@ -104,7 +104,7 @@ QJsonArray InitializeEngine::getMyPlaylists(){
         file.open(QIODevice::ReadOnly | QIODevice::Text);
 
         val = file.readAll();
-        qWarning()<<val;
+
         file.close();
 
         QJsonDocument d = QJsonDocument::fromJson(val.toUtf8());

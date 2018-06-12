@@ -78,14 +78,14 @@ void library::readLibJson(QString fileName)
     file.close();
 
     QJsonDocument libDocument = QJsonDocument::fromJson(libString.toUtf8());
-    qWarning() << libDocument.isNull(); // <- print false
+
     libraryArray = libDocument.array();
-    qWarning() << libraryArray[0];  // <- print my title
+
 }
 
 inline bool library::libJsonExists (string fileName) {
     ifstream f(fileName.c_str());
-    cout<<"filename for jsonexists: "<<fileName<<endl;
+    cout<<"filename for json exists: "<<fileName<<endl;
     return f.good();
 }
 
@@ -101,7 +101,6 @@ void library::checkPlaylist(){
     if(!f.good()){
         ofstream file("../../../../backend/playlists/myPlaylists.json");
         file.close();
-        cout<<"playlist record didn't exist, making now"<<endl;
         QJsonArray arry;
         QJsonObject nameObject;
         nameObject.insert("name", "Library");
