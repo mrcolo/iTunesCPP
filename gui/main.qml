@@ -354,7 +354,7 @@ ApplicationWindow {
                             text: control.text
                             font: control.font
                             opacity: enabled ? 1.0 : 0.3
-                            color: control.down ? "#75bcff" : "#515151"
+                            color: control.down ? "#75bcff" : (name == "Library" ? "#F0B841" : "#515151")
                             horizontalAlignment: Text.AlignHCenter
                             verticalAlignment: Text.AlignVCenter
                             elide: Text.ElideRight
@@ -517,7 +517,7 @@ ApplicationWindow {
             property bool loopIt: false
             width:parent.width/6
             icon.source: "qrc:/src/icons/loop.svg"
-            icon.color: loopIt ? "blue" : "black"
+            icon.color: loopIt ? "#F0B841" : "black"
             padding:20                    
             onClicked: loopIt = !loopIt
         }
@@ -641,7 +641,7 @@ ApplicationWindow {
            property bool shuffleIt: false
            width:parent.width/6
            icon.source: "qrc:/src/icons/shuffle.svg"
-           icon.color: shuffleIt ? "blue" : "black"
+           icon.color: shuffleIt ? "#F0B841" : "black"
            padding:20
            onClicked : {
             shuffleIt = !shuffleIt;

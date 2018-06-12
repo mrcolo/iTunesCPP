@@ -1,0 +1,34 @@
+[
+    {
+        "album": "The Peace and the Panic",
+        "artist": "Neck Deep",
+        "genre": "Pop Punk",
+        "index": 0,
+        "path": "/Users/francescocolonnese/Music/myMusic/08. Wish You Were Here.mp3",
+        "title": "Wish You Were Here"
+    },
+    {
+        "album": "The Peace and the Panic",
+        "artist": "Neck Deep",
+        "genre": "Pop Punk",
+        "index": 1,
+        "path": "/Users/francescocolonnese/Music/myMusic/07. Critical Mistake.mp3",
+        "title": "Critical Mistake"
+    },
+    {
+        "album": "The Peace and the Panic",
+        "artist": "Neck Deep",
+        "genre": "Pop Punk",
+        "index": 2,
+        "path": "/Users/francescocolonnese/Music/myMusic/01. Motion Sickness.mp3",
+        "title": "Motion Sickness"
+    },
+    {
+        "album": "The Peace and the Panic",
+        "artist": "Neck Deep",
+        "genre": "Pop Punk",
+        "index": 3,
+        "path": "/Users/francescocolonnese/Music/myMusic/12. Beautiful Madness.mp3",
+        "title": "Beautiful Madness"
+    }
+]
